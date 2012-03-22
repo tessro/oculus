@@ -1,11 +1,22 @@
-When /^I execute "([^"]*)"$/ do |query|
+Before do
+  @data_store ||= Oculus::Storage::FileStore.new('tmp/data')
   @connection ||= Oculus::Connection::Mysql2.new(:database => 'test')
-  @results ||= {}
-  @results[query] = @connection.execute(query)
-  @last_query = query
+end
+
+Given /^a query is cached with results:$/ do |results|
+  Oculus::Query.data_store ||= @data_store
+  query = Oculus::Query.create(:description => "all users", :query => "SELECT * FROM oculus_users", :results => results.raw)
+end
+
+When /^I execute "([^"]*)"$/ do |query|
+  @results = @connection.execute(query)
+end
+
+When /^I load the cached query$/ do |id|
+  @results = @data_store.load_query(id)
 end
 
 Then /^I should see (\d+) rows of results$/ do |result_count|
   result_count = result_count.to_i
-  @results[@last_query].count.should == result_count + 1
+  @results.count.should == result_count + 1
 end
