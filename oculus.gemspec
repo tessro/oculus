@@ -18,4 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "sinatra", [">= 1.3.0"]
   gem.add_runtime_dependency "mysql2",  [">= 0.3.11"]
   gem.add_runtime_dependency "vegas",   [">= 0.1.4"]
+
+  gem.add_development_dependency "cucumber", [">= 1"]
+  gem.add_development_dependency "rspec",    [">= 2"]
 end
