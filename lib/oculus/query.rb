@@ -1,12 +1,19 @@
 module Oculus
   class Query
-    attr_reader :id
+    attr_accessor :id
+    attr_accessor :description
+    attr_accessor :query
     attr_accessor :results
 
     def initialize(attributes = {})
       attributes.each do |attr, value|
         send("#{attr}=", value)
       end
+    end
+
+    def attributes
+      { :description => description,
+        :query       => query }
     end
 
     class << self
