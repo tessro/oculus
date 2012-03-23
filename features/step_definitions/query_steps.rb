@@ -5,15 +5,15 @@ end
 
 Given /^a query is cached with results:$/ do |results|
   Oculus::Query.data_store ||= @data_store
-  query = Oculus::Query.create(:description => "all users", :query => "SELECT * FROM oculus_users", :results => results.raw)
+  @last_query = Oculus::Query.create(:description => "all users", :query => "SELECT * FROM oculus_users", :results => results.raw)
 end
 
 When /^I execute "([^"]*)"$/ do |query|
   @results = @connection.execute(query)
 end
 
-When /^I load the cached query$/ do |id|
-  @results = @data_store.load_query(id)
+When /^I load the cached query$/ do
+  @results = @data_store.load_query(@last_query.id).results
 end
 
 Then /^I should see (\d+) rows of results$/ do |result_count|
