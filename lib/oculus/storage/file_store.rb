@@ -31,7 +31,9 @@ module Oculus
       end
 
       def load_query(id)
-        File.parse(filename_for_id(id))
+        path = filename_for_id(id)
+
+        File.parse(path) if File.exist?(path)
       end
 
       private
