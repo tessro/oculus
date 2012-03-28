@@ -26,9 +26,7 @@ module Oculus
       end
 
       def find(id)
-        if attrs = data_store.find_query(id)
-          new(attrs)
-        end
+        data_store.load_query(id)
       end
     end
   end

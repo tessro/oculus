@@ -21,7 +21,7 @@ describe Oculus::Query do
   end
 
   it "retrieves cached queries from the data store" do
-    Oculus::Query.data_store.should_receive(:find_query).with(1)
+    Oculus::Query.data_store.should_receive(:load_query).with(1)
     Oculus::Query.find(1)
   end
 end
