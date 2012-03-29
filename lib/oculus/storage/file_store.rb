@@ -15,7 +15,7 @@ module Oculus
       end
 
       def save_query(query)
-        query.id = next_id
+        query.id = next_id if query.id.nil?
 
         File.open(filename_for_id(query.id), 'w') do |file|
           file.write_prelude(query.attributes)

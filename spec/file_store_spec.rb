@@ -42,6 +42,13 @@ describe Oculus::Storage::FileStore do
     subject.load_query(query.id).id.should == query.id
   end
 
+  it "doesn't overwrite an existing query id when saving" do
+    subject.save_query(query)
+    original_id = query.id
+    subject.save_query(query)
+    query.id.should == original_id
+  end
+
   it "returns nil for missing queries" do
     subject.load_query(39827493).should be nil
   end
