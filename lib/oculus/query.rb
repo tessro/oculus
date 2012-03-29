@@ -17,16 +17,14 @@ module Oculus
     end
 
     class << self
-      attr_accessor :data_store
-
       def create(attributes)
         new(attributes).tap do |query|
-          data_store.save_query(query)
+          Oculus.data_store.save_query(query)
         end
       end
 
       def find(id)
-        data_store.load_query(id)
+        Oculus.data_store.load_query(id)
       end
     end
   end
