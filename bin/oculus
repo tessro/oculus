@@ -10,4 +10,8 @@ end
 require 'oculus/server'
 
 
-Vegas::Runner.new(Oculus::Server, 'oculus')
+Vegas::Runner.new(Oculus::Server, 'oculus') do |runner, opts, app|
+  opts.on("-d", "--data", "Data cache path (default: tmp/data)") do |path|
+    Oculus.cache_path = path
+  end
+end
