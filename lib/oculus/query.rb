@@ -18,11 +18,19 @@ module Oculus
         :query       => query }
     end
 
+    def save
+      Oculus.data_store.save_query(self)
+    end
+
+    def ready?
+      !results.nil? && !results.empty?
+    end
+
     class << self
       def create(attributes)
-        new(attributes).tap do |query|
-          Oculus.data_store.save_query(query)
-        end
+        query = new(attributes)
+        query.save
+        query
       end
 
       def find(id)

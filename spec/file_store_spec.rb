@@ -25,6 +25,15 @@ describe Oculus::Storage::FileStore do
     FileUtils.rm_r('tmp/test_cache')
   end
 
+  it "round-trips a query with no results to disk" do
+    query = Oculus::Query.new(:description => "Unfinished query", :author => "Me")
+    subject.save_query(query)
+    subject.load_query(query.id).results.should == []
+    subject.load_query(query.id).query.should == query.query
+    subject.load_query(query.id).author.should == query.author
+    subject.load_query(query.id).id.should == query.id
+  end
+
   it "round-trips a query to disk" do
     subject.save_query(query)
     subject.load_query(query.id).results.should == query.results

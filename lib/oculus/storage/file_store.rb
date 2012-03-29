@@ -19,7 +19,7 @@ module Oculus
 
         File.open(filename_for_id(query.id), 'w') do |file|
           file.write_prelude(query.attributes)
-          file.write_results(query.results)
+          file.write_results(query.results) if query.results
         end
       end
 
