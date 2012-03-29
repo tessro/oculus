@@ -9,15 +9,8 @@ module Oculus
       end
 
       def all_queries
-        Dir["#{root}/*.query"].map do |filename|
-          yaml = ""
-          File.open(filename) do |file|
-            file.gets # discard header
-            until (line = file.gets) == "---\n"
-              yaml += line
-            end
-            YAML.parse(yaml)
-          end
+        Dir["#{root}/*.query"].map do |path|
+          File.parse(path)
         end
       end
 
