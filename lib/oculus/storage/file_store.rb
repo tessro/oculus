@@ -91,7 +91,8 @@ module Oculus
       end
 
       def next_id
-        id_file = File.open(File.join(root, 'NEXT_ID'), 'r+')
+        reset_primary_key unless File.exist?(primary_key_path)
+        id_file = File.open(primary_key_path, 'r+')
         id_file.flock(File::LOCK_EX)
 
         id = id_file.read.to_i
@@ -102,6 +103,16 @@ module Oculus
         id_file.close
 
         id
+      end
+
+      def reset_primary_key
+        File.open(primary_key_path, 'w') do |file|
+          file.puts '0'
+        end
+      end
+
+      def primary_key_path
+        File.join(root, 'NEXT_ID')
       end
 
       attr_reader :root
