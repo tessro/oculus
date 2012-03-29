@@ -15,6 +15,7 @@ describe Oculus::Storage::FileStore do
     subject.load_query(query.id).results.should == query.results
     subject.load_query(query.id).query.should == query.query
     subject.load_query(query.id).author.should == query.author
+    subject.load_query(query.id).id.should == query.id
   end
 
   it "returns nil for missing queries" do

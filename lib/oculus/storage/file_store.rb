@@ -43,7 +43,9 @@ module Oculus
           file = File.open(path)
           attributes = file.attributes
           attributes[:results] = file.results
-          Oculus::Query.new(attributes)
+          Oculus::Query.new(attributes).tap do |query|
+            query.id = File.basename(path).split('.').first.to_i
+          end
         end
 
         def write_prelude(attributes)
