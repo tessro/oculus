@@ -78,3 +78,9 @@ header small {
   font-size: 14px;
   padding: 2px 4px;
 }
+
+#query-description {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
