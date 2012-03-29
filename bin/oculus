@@ -11,7 +11,22 @@ require 'oculus/server'
 
 
 Vegas::Runner.new(Oculus::Server, 'oculus') do |runner, opts, app|
-  opts.on("-d", "--data", "Data cache path (default: tmp/data)") do |path|
+  opts.on("-h", "--host HOST", "Database server hostname") do |host|
+    Oculus.connection_options[:host] = host
+  end
+  opts.on("-P", "--port PORT", "Database server port") do |port|
+    Oculus.connection_options[:port] = port.to_i
+  end
+  opts.on("-u", "--username USER", "Database username") do |username|
+    Oculus.connection_options[:username] = username
+  end
+  opts.on("-p", "--password PASSWORD", "Database password") do |password|
+    Oculus.connection_options[:password] = password
+  end
+  opts.on("-D", "--database DATABASE", "Database to use") do |db|
+    Oculus.connection_options[:database] = db
+  end
+  opts.on("-d", "--data DIRECTORY", "Data cache path (default: tmp/data)") do |path|
     Oculus.cache_path = path
   end
 end

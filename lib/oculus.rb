@@ -6,6 +6,8 @@ require "oculus/query"
 module Oculus
   extend self
 
+  DEFAULT_CONNECTION_OPTIONS = { :host => 'localhost', :username => 'root' }
+
   attr_writer :cache_path
 
   def cache_path
@@ -16,6 +18,12 @@ module Oculus
 
   def data_store
     @data_store ||= Oculus::Storage::FileStore.new(Oculus.cache_path)
+  end
+
+  attr_writer :connection_options
+
+  def connection_options
+    @connection_options ||= DEFAULT_CONNECTION_OPTIONS
   end
 end
 

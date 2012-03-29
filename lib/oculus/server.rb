@@ -31,7 +31,7 @@ module Oculus
                                    :query       => params[:query])
 
       pid = fork do
-        connection = Oculus::Connection::Mysql2.new(:host => 'localhost', :username => 'root', :database => 'test')
+        connection = Oculus::Connection::Mysql2.new(Oculus.connection_options)
         query.results = connection.execute(params[:query])
         query.save
       end
