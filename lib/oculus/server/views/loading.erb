@@ -1,0 +1,22 @@
+<script>
+  var queryId    = window.location.href.match(/\/queries\/([0-9]+)\/loading/)[1];
+  var statusUrl  = '/queries/' + queryId + '/ready';
+  var resultsUrl = '/queries/' + queryId;
+
+  function poll() {
+    $.ajax({
+      url: statusUrl,
+      success: function(status) {
+        if (status === 'true') {
+          window.location.href = resultsUrl;
+        } else {
+          setTimeout(poll, 1000);
+        }
+      }
+    });
+  }
+
+  poll();
+</script>
+
+Loading...

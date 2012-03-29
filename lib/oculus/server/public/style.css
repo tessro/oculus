@@ -1,0 +1,76 @@
+body {
+  font-family: "Lucida Grande", Arial;
+  font-size: 12px;
+}
+
+header {
+  background: #056;
+  padding: 5px 5px 0;
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  color: #fff;
+  display: inline;
+  margin-right: 10px;
+}
+
+header small {
+  color: #ddd;
+  font-size: 11px;
+  height: 24px;
+}
+
+#content {
+  margin: 20px;
+}
+
+#query-form label {
+  display: block;
+  float: left;
+  width: 100px;
+  height: 17px;
+  margin: 9px 10px 0 0;
+  text-align: right;
+  font-weight: bold;
+}
+
+#query-form input[type=submit] {
+  margin: 5px 0 0 110px;
+  font-size: 16px;
+}
+
+#query-form input[type=text] {
+  margin-top: 3px;
+  width: 450px;
+  font-size: 14px;
+  padding: 3px;
+  border: none;
+  border-bottom: 1px solid #000;
+}
+
+#query-form input[type=text]:focus {
+  outline: none;
+  border-bottom-color: #f00;
+}
+
+#query-form textarea {
+  margin-top: 4px;
+  width: 900px;
+  height: 150px;
+  font-size: 16px;
+  font-family: Courier, fixed;
+}
+
+#results-table th {
+  font-weight: bold;
+  border-bottom: 1px solid #000;
+}
+
+#results-table th, #results-table td {
+  font-family: Courier, fixed;
+  font-size: 14px;
+  padding: 2px 4px;
+}

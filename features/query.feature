@@ -1,5 +1,6 @@
 Feature: Users can query the database
 
+  @javascript
   Scenario: Running a new query
     When I execute "SELECT * FROM oculus_users"
     Then I should see 3 rows of results

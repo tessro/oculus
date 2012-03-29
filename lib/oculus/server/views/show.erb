@@ -1,0 +1,21 @@
+<%= @query.description %>
+<%= @query.author %>
+
+<table id="results-table">
+  <thead>
+    <tr>
+      <% @headers.each do |label| %>
+        <th><%= label %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody id="results">
+    <% @results.each do |result| %>
+      <tr>
+        <% result.each do |value| %>
+          <td><%= value %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

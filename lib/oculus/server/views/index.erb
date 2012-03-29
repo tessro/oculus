@@ -1,0 +1,25 @@
+<form id="query-form" method="POST" action="/queries">
+  <ul>
+    <li>
+      <label for="author">Author:</label>
+      <input type="text" name="author" placeholder="Who are you?" />
+    </li>
+    <li>
+      <label for="description">Description:</label>
+      <input type="text" name="description" placeholder="What is this query about?" />
+    </li>
+    <li>
+      <label for="query">Query:</label>
+      <textarea name="query"></textarea>
+    </li>
+      <input type="submit" name="submit" value="Run" />
+    <li>
+    </li>
+  </ul>
+</form>
+
+<ul>
+  <% @queries.each do |query| %>
+    <li><a href="/queries/<%= query.id %>"><%= query.description %></a></li>
+  <% end %>
+</ul>
