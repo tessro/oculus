@@ -15,6 +15,11 @@ describe Oculus::Query do
     query.description.should == 'foo'
   end
 
+  it "has an author" do
+    query = Oculus::Query.new(:author => 'Paul')
+    query.author.should == 'Paul'
+  end
+
   it "stores new queries in the data store" do
     Oculus.data_store.should_receive(:save_query)
     query = Oculus::Query.create(:results => [['id', 'name'], [1, 'Paul']])

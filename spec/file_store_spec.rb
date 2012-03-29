@@ -6,6 +6,7 @@ describe Oculus::Storage::FileStore do
   let(:query) do
     Oculus::Query.new(:description => "All users",
                       :query       => "SELECT * FROM oculus_users",
+                      :author      => "Paul",
                       :results     => [['id', 'users'], ['1', 'Paul'], ['2', 'Amy']])
   end
 
@@ -13,6 +14,7 @@ describe Oculus::Storage::FileStore do
     subject.save_query(query)
     subject.load_query(query.id).results.should == query.results
     subject.load_query(query.id).query.should == query.query
+    subject.load_query(query.id).author.should == query.author
   end
 
   it "returns nil for missing queries" do

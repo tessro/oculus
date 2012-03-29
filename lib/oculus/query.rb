@@ -2,6 +2,7 @@ module Oculus
   class Query
     attr_accessor :id
     attr_accessor :description
+    attr_accessor :author
     attr_accessor :query
     attr_accessor :results
 
@@ -13,6 +14,7 @@ module Oculus
 
     def attributes
       { :description => description,
+        :author      => author,
         :query       => query }
     end
 
