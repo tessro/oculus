@@ -10,6 +10,18 @@ describe Oculus::Query do
     query.query.should == 'SELECT * FROM users'
   end
 
+  it "has a date" do
+    query = Oculus::Query.new
+    query.date.should be nil
+  end
+
+  it "updates date on save" do
+    Oculus.data_store.stub(:save_query)
+    Time.stub(:now).and_return(now = stub)
+    query = Oculus::Query.create(:results => [['id', 'name'], [1, 'Paul']])
+    query.date.should == now
+  end
+
   it "has a description" do
     query = Oculus::Query.new(:description => 'foo')
     query.description.should == 'foo'

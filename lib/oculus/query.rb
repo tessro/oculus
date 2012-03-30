@@ -6,6 +6,8 @@ module Oculus
     attr_accessor :query
     attr_accessor :results
 
+    attr_reader :date
+
     def initialize(attributes = {})
       attributes.each do |attr, value|
         send("#{attr}=", value)
@@ -19,6 +21,7 @@ module Oculus
     end
 
     def save
+      @date = Time.now
       Oculus.data_store.save_query(self)
     end
 
