@@ -30,6 +30,7 @@ describe Oculus::Storage::FileStore do
     subject.save_query(query)
     subject.load_query(query.id).results.should == []
     subject.load_query(query.id).query.should == query.query
+    subject.load_query(query.id).date.should == query.date
     subject.load_query(query.id).author.should == query.author
     subject.load_query(query.id).id.should == query.id
   end
@@ -38,6 +39,7 @@ describe Oculus::Storage::FileStore do
     subject.save_query(query)
     subject.load_query(query.id).results.should == query.results
     subject.load_query(query.id).query.should == query.query
+    subject.load_query(query.id).date.should == query.date
     subject.load_query(query.id).author.should == query.author
     subject.load_query(query.id).id.should == query.id
   end

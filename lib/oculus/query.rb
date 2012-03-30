@@ -5,8 +5,7 @@ module Oculus
     attr_accessor :author
     attr_accessor :query
     attr_accessor :results
-
-    attr_reader :date
+    attr_accessor :date
 
     def initialize(attributes = {})
       attributes.each do |attr, value|
@@ -17,7 +16,8 @@ module Oculus
     def attributes
       { :description => description,
         :author      => author,
-        :query       => query }
+        :query       => query,
+        :date        => date }
     end
 
     def save
