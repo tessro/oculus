@@ -60,6 +60,13 @@ header small {
   border-bottom-color: #f00;
 }
 
+#editor-container {
+  display: inline-block;
+  width: 900px;
+  font-size: 16px;
+  border: 1px solid #000;
+}
+
 #query-form textarea {
   margin-top: 4px;
   width: 900px;
