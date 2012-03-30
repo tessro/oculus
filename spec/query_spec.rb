@@ -15,6 +15,13 @@ describe Oculus::Query do
     query.date.should be nil
   end
 
+  it "has a formatted date" do
+    # TODO: this should be in a presenter
+    query = Oculus::Query.new
+    query.date = Time.mktime(2010, 1, 1, 12, 34)
+    query.formatted_date.should == '2010-01-01 12:34'
+  end
+
   it "updates date on save" do
     Oculus.data_store.stub(:save_query)
     Time.stub(:now).and_return(now = stub)
