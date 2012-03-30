@@ -20,8 +20,17 @@
   </ul>
 </form>
 
-<ul>
-  <% @queries.each do |query| %>
-    <li><a href="/queries/<%= query.id %>"><%= query.description %></a></li>
-  <% end %>
-</ul>
+<section id="history">
+  <h2>Query History</h2>
+  <ol>
+    <% @queries.each do |query| %>
+      <li>
+        <span class="date"><%= query.formatted_date %></span>
+        <a href="/queries/<%= query.id %>"><%= query.description %></a>
+        <% if query.author %>
+          <span class="author">(<%= query.author %>)</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</section>

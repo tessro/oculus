@@ -27,7 +27,8 @@ module Oculus
     end
 
     post '/queries' do
-      query = Oculus::Query.create(:description => params[:description],
+      query = Oculus::Query.create(:author      => params[:author],
+                                   :description => params[:description],
                                    :query       => params[:query])
 
       pid = fork do

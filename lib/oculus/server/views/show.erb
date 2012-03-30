@@ -1,21 +1,25 @@
 <h1 id="query-description"><%= @query.description %></h1>
 <h2 id="query-author"><%= @query.author %></h2>
 
-<table id="results-table">
-  <thead>
-    <tr>
-      <% @headers.each do |label| %>
-        <th><%= label %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody id="results">
-    <% @results.each do |result| %>
+<% if @query.ready? %>
+  <table id="results-table">
+    <thead>
       <tr>
-        <% result.each do |value| %>
-          <td><%= value %></td>
+        <% @headers.each do |label| %>
+          <th><%= label %></th>
         <% end %>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody id="results">
+      <% @results.each do |result| %>
+        <tr>
+          <% result.each do |value| %>
+            <td><%= value %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div id="no-results">No results</div>
+<% end %>

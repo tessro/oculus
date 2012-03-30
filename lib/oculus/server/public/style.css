@@ -91,3 +91,40 @@ header small {
   font-weight: bold;
   margin: 0 0 10px;
 }
+
+#history {
+  width: 500px;
+}
+
+#history h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #000;
+}
+
+#history li {
+  padding: 4px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+#history a {
+  color: #24a;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+#history .date {
+  color: #666;
+  font-family: Courier, fixed;
+  width: 140px;
+  margin-right: 10px;
+  display: inline-block;
+  text-align: right;
+  font-size: 14px;
+}
+
+#history .author {
+  color: #aaa;
+}
