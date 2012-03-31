@@ -29,13 +29,18 @@ module Oculus
         if File.exist?(path)
           File.parse(path)
         else
-          raise QueryNotFound
+          raise QueryNotFound, id
         end
       end
 
       def delete_query(id)
         path = filename_for_id(id)
-        File.unlink(path) if File.exist?(path)
+
+        if File.exist?(path)
+          File.unlink(path)
+        else
+          raise QueryNotFound, id
+        end
       end
 
       private

@@ -73,4 +73,10 @@ describe Oculus::Storage::FileStore do
       subject.load_query(query.id)
     }.should raise_error(Oculus::Storage::QueryNotFound)
   end
+
+  it "raises QueryNotFound when deleting a nonexistent query" do
+    lambda {
+      subject.delete_query(10983645)
+    }.should raise_error(Oculus::Storage::QueryNotFound)
+  end
 end
