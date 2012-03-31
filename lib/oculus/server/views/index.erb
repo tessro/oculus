@@ -30,6 +30,7 @@
         <% if query.author %>
           <span class="author">(<%= query.author %>)</span>
         <% end %>
+        <a class="delete" title="delete" href="/queries/<%= query.id %>">&times;</a>
       </li>
     <% end %>
   </ol>

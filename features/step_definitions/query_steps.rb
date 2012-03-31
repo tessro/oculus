@@ -13,8 +13,19 @@ When /^I load the cached query$/ do
   click_link 'all users'
 end
 
+When /^I click delete$/ do
+  visit '/'
+  click_link 'delete'
+end
+
 Then /^I should see (\d+) rows of results$/ do |result_count|
   within('#results') do
     all('tr').length.should == result_count.to_i
+  end
+end
+
+Then /^I should not see any queries$/ do
+  within('#history') do
+    all('li').length.should == 0
   end
 end

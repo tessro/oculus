@@ -26,7 +26,16 @@ module Oculus
       def load_query(id)
         path = filename_for_id(id)
 
-        File.parse(path) if File.exist?(path)
+        if File.exist?(path)
+          File.parse(path)
+        else
+          raise QueryNotFound
+        end
+      end
+
+      def delete_query(id)
+        path = filename_for_id(id)
+        File.unlink(path) if File.exist?(path)
       end
 
       private

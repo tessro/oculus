@@ -3,6 +3,10 @@ body {
   font-size: 12px;
 }
 
+a {
+  color: #24a;
+}
+
 header {
   background: #056;
   padding: 5px 5px 0;
@@ -110,9 +114,27 @@ header small {
 }
 
 #history a {
-  color: #24a;
-  font-size: 14px;
   text-decoration: none;
+  font-size: 14px;
+}
+
+.delete {
+  display: inline-block;
+  height: 11px;
+  width: 11px;
+  line-height: 9px;
+  padding: 2px;
+  color: #aaa;
+}
+
+.delete:hover {
+  border-radius: 7px;
+  background: #800;
+  color: #fff;
+}
+
+#history .delete {
+  float: right;
 }
 
 #history .date {

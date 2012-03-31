@@ -57,5 +57,9 @@ module Oculus
     get '/queries/:id/ready' do
       Oculus::Query.find(params[:id]).ready?.to_s
     end
+
+    delete '/queries/:id' do
+      Oculus.data_store.delete_query(params[:id])
+    end
   end
 end

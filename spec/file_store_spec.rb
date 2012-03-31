@@ -51,8 +51,10 @@ describe Oculus::Storage::FileStore do
     query.id.should == original_id
   end
 
-  it "returns nil for missing queries" do
-    subject.load_query(39827493).should be nil
+  it "raises QueryNotFound for missing queries" do
+    lambda {
+      subject.load_query(39827493)
+    }.should raise_error(Oculus::Storage::QueryNotFound)
   end
 
   it "fetches all queries" do
@@ -60,5 +62,15 @@ describe Oculus::Storage::FileStore do
     subject.save_query(other_query)
 
     subject.all_queries.map(&:results).should == [query.results, other_query.results]
+  end
+
+  it "deletes queries" do
+    subject.save_query(query)
+    subject.load_query(query.id).description.should == query.description
+    subject.delete_query(query.id)
+
+    lambda {
+      subject.load_query(query.id)
+    }.should raise_error(Oculus::Storage::QueryNotFound)
   end
 end
