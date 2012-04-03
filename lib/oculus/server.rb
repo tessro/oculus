@@ -60,6 +60,7 @@ module Oculus
 
     delete '/queries/:id' do
       Oculus.data_store.delete_query(params[:id])
+      puts "true"
     end
   end
 end
