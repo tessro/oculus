@@ -150,3 +150,17 @@ header small {
 #history .author {
   color: #aaa;
 }
+
+#loading {
+  margin-top: 100px;
+  text-align: center;
+  font-family: Courier, fixed;
+  font-size: 40px;
+}
+
+#elapsed-time {
+  margin: 40px auto;
+  text-align: center;
+  font-family: Courier, fixed;
+  font-size: 24px;
+}

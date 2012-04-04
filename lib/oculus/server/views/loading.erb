@@ -17,6 +17,51 @@
   }
 
   poll();
+
+  function lpad(number, targetDigits) {
+    var sourceDigits = String(number).length;
+
+    for (var i = 0; i < targetDigits - sourceDigits; i++) {
+      number = '0' + number;
+    }
+
+    return number;
+  }
+
+  function Countdown(node, startTime) {
+    this._startTime = startTime;
+    this._node = node;
+  }
+
+  Countdown.prototype.start = function() {
+    var self = this;
+    (function loop() {
+      self.tick();
+      setTimeout(loop, 70);
+    })();
+  };
+
+  Countdown.prototype.tick = function() {
+    var current = new Date();
+    var elapsed = current - this._startTime;
+    this._node.text(this._formatElapsedTime(elapsed));
+  };
+
+  Countdown.prototype._formatElapsedTime = function(elapsed) {
+    var ms    = lpad(elapsed % 1000, 3);
+    var secs  = lpad(Math.floor(elapsed / 1000) % 60, 2);
+    var mins  = lpad(Math.floor(elapsed / (60 * 1000)) % 60, 2);
+    var hours = Math.floor(elapsed / (60 * 60 * 1000));
+
+    return hours + ":" + mins + ":" + secs + "." + ms;
+  }
+
+  $(function() {
+    var countdown = new Countdown($('#elapsed-time'), new Date('<%= @query.date.utc %>'));
+    countdown.start();
+  });
 </script>
 
-Loading...
+<div id="loading">LOADING</div>
+
+<div id="elapsed-time"></div>

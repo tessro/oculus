@@ -51,6 +51,8 @@ module Oculus
     end
 
     get '/queries/:id/loading' do
+      @query = Oculus::Query.find(params[:id])
+
       erb :loading
     end
 
