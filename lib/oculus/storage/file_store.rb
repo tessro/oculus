@@ -11,7 +11,7 @@ module Oculus
       def all_queries
         Dir["#{root}/*.query"].map do |path|
           File.parse(path)
-        end
+        end.reverse
       end
 
       def save_query(query)

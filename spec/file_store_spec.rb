@@ -57,11 +57,11 @@ describe Oculus::Storage::FileStore do
     }.should raise_error(Oculus::Storage::QueryNotFound)
   end
 
-  it "fetches all queries" do
+  it "fetches all queries in reverse chronological order" do
     subject.save_query(query)
     subject.save_query(other_query)
 
-    subject.all_queries.map(&:results).should == [query.results, other_query.results]
+    subject.all_queries.map(&:results).should == [other_query.results, query.results]
   end
 
   it "deletes queries" do
