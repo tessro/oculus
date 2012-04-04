@@ -79,4 +79,10 @@ describe Oculus::Storage::FileStore do
       subject.delete_query(10983645)
     }.should raise_error(Oculus::Storage::QueryNotFound)
   end
+
+  it "sanitizes query IDs" do
+    lambda {
+      subject.delete_query('..')
+    }.should raise_error(ArgumentError)
+  end
 end

@@ -94,6 +94,7 @@ module Oculus
       end
 
       def filename_for_id(id)
+        raise ArgumentError unless id.is_a?(Integer) || id =~ /^[0-9]+/
         File.join(root, "#{id}.query")
       end
 
