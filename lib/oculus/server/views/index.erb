@@ -1,37 +1,58 @@
-<form id="query-form" method="POST" action="/queries">
-  <ul>
-    <li>
-      <label for="author">Author:</label>
-      <input type="text" name="author" placeholder="Who are you?" />
-    </li>
-    <li>
-      <label for="description">Description:</label>
-      <input type="text" name="description" placeholder="What is this query about?" />
-    </li>
-    <li>
-      <label for="query">Query:</label>
-      <div id="editor-container">
-        <textarea name="query"></textarea>
+<% @current_tab = 'home' %>
+<form id="query-form" method="POST" action="/queries" class="well form-horizontal">
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label" for="author">Author:</label>
+      <div class="controls">
+        <input type="text" name="author" placeholder="Who are you?" />
       </div>
-    </li>
-      <input type="submit" name="submit" value="Run" />
-    <li>
-    </li>
-  </ul>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="description">Description:</label>
+      <div class="controls">
+        <input type="text" name="description" placeholder="What is this query about?" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="query">Query:</label>
+      <div class="controls">
+        <div id="editor-container">
+          <textarea name="query"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <input type="submit" class="btn" name="submit" value="Run" />
+      </div>
+    </div>
+  </fieldset>
 </form>
 
 <section id="history">
   <h2>Query History</h2>
-  <ol>
-    <% @queries.each do |query| %>
-      <li>
-        <span class="date"><%= query.formatted_date %></span>
-        <a href="/queries/<%= query.id %>"><%= query.description %></a>
-        <% if query.author %>
-          <span class="author">(<%= query.author %>)</span>
-        <% end %>
-        <a class="delete" title="delete" href="/queries/<%= query.id %>">&times;</a>
-      </li>
-    <% end %>
-  </ol>
+  <table class="table">
+    <thead>
+      <th>Timestamp</th>
+      <th>Query</th>
+      <th>Author</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @queries.each do |query| %>
+        <tr>
+          <td class="date"><%= query.formatted_date %></td>
+          <td>
+            <a href="/queries/<%= query.id %>"><%= query.description %></a>
+          </td>
+          <td class="author">
+            <%= query.author %>
+          </td>
+          <td>
+            <a class="delete" href="/queries/<%= query.id %>"><i class="icon-remove"></i></a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </section>

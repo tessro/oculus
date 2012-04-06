@@ -2,19 +2,29 @@
 <html>
   <head>
     <title>Oculus</title>
-    <script src="/jquery.min.js" type="text/javascript"></script>
-    <script src="/codemirror-mysql.js" type="text/javascript"></script>
-    <script src="/application.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
-    <link rel="stylesheet" type="text/css" href="/codemirror.css" />
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/codemirror-mysql.js" type="text/javascript"></script>
+    <script src="/js/application.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/codemirror.css" />
   </head>
   <body>
-    <header>
-      <h1><a href="/">Oculus</a></h1>
-      <small>No analysis unseen.</small>
-    </header>
-    <div id="content">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Oculus</a>
+          <ul class="nav">
+            <li<% if @current_tab == 'home' %> class="active"<% end %>>
+              <a href="/">Home</a>
+            </li>
+          </ul>
+          <p class="pull-right navbar-text">No analysis unseen.</p>
+        </div>
+      </div>
+    </div>
+    <div id="content" class="container">
       <%= yield %>
     </div>
   </body>

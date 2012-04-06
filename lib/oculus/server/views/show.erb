@@ -1,5 +1,13 @@
-<h1 id="query-description"><%= @query.description %></h1>
-<h2 id="query-author"><%= @query.author %></h2>
+<h1><%= @query.description %></h1>
+
+<dl class="dl-horizontal">
+  <dt>Author</dt>
+  <dd><%= @query.author %></dd>
+  <dt>Timestamp</dt>
+  <dd><%= @query.formatted_date %></dd>
+</dl>
+
+<pre><%= @query.query %></pre>
 
 <% if @query.ready? %>
   <table id="results-table">
@@ -21,5 +29,8 @@
     </tbody>
   </table>
 <% else %>
-  <div id="no-results">No results</div>
+  <div class="alert alert-info">
+    <strong>Head's Up!</strong>
+    This query is in progress, and has not returned any results yet.
+  </div>
 <% end %>
