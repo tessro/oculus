@@ -59,9 +59,14 @@
   $(function() {
     var countdown = new Countdown($('#elapsed-time'), new Date('<%= @query.date.utc %>'));
     countdown.start();
+
+    var queryNode = $('pre.cm-s-default');
+    CodeMirror.runMode(queryNode.text(), 'mysql', queryNode[0]);
   });
 </script>
 
 <div id="loading">LOADING</div>
 
 <div id="elapsed-time"></div>
+
+<pre class="cm-s-default"><%= @query.query %></pre>
