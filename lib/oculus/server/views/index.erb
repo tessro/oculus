@@ -33,6 +33,7 @@
   <h2>Query History</h2>
   <table class="table">
     <thead>
+      <th></th>
       <th>Timestamp</th>
       <th>Query</th>
       <th>Author</th>
@@ -41,6 +42,7 @@
     <tbody>
       <% @queries.each do |query| %>
         <tr>
+          <td class="status"><span class="indicator indicator-<%= query.status %>">*</span></td>
           <td class="date"><%= query.formatted_date %></td>
           <td>
             <a href="/queries/<%= query.id %>"><%= query.description %></a>

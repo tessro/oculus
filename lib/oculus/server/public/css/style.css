@@ -70,3 +70,26 @@ body {
   font-family: Courier, fixed;
   font-size: 24px;
 }
+
+.status .indicator {
+  text-indent: -9999px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-bottom: 2px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.status .indicator-error {
+  background: #e00;
+}
+
+.status .indicator-done {
+  background: #080;
+}
+
+.status .indicator-loading {
+  background: #fc0;
+}
