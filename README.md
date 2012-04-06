@@ -3,6 +3,7 @@
 ![The Oculus of the Pantheon](http://upload.wikimedia.org/wikipedia/commons/1/17/Oculus_of_the_Pantheon.jpg)
 
 [![Build Status](https://secure.travis-ci.org/paulrosania/oculus.png?branch=master)](http://travis-ci.org/paulrosania/oculus)
+[![Dependency Status](https://gemnasium.com/paulrosania/oculus.png)](https://gemnasium.com/paulrosania/oculus)
 
 Oculus is a web-based logging SQL client.  It keeps a history of your queries
 and the results they returned, so your research is always at hand, easy to share
