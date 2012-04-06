@@ -7,7 +7,7 @@
   <dd><%= @query.formatted_date %></dd>
 </dl>
 
-<pre><%= @query.query %></pre>
+<pre class="cm-s-default"><%= @query.query %></pre>
 
 <% if @query.ready? %>
   <table id="results-table">
@@ -34,3 +34,8 @@
     This query is in progress, and has not returned any results yet.
   </div>
 <% end %>
+
+<script type="text/javascript">
+  var queryNode = $('pre.cm-s-default');
+  CodeMirror.runMode(queryNode.text(), 'mysql', queryNode[0]);
+</script>
