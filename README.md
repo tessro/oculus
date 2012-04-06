@@ -24,7 +24,7 @@ For details on command line options, run:
 ## Contributing
 
 1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+2. Make your changes
+3. Send me a pull request
+
+If you're making a big change, please open an Issue first, so we can discuss.
