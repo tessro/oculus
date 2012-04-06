@@ -17,7 +17,7 @@
       <label class="control-label" for="query">Query:</label>
       <div class="controls">
         <div id="editor-container">
-          <textarea name="query"></textarea>
+          <textarea name="query" id="query-field"></textarea>
         </div>
       </div>
     </div>
@@ -56,3 +56,9 @@
     </tbody>
   </table>
 </section>
+
+<script type="text/javascript">
+  CodeMirror.fromTextArea(document.getElementById('query-field'), {
+    tabSize: 2
+  });
+</script>
