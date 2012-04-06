@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'oculus'
+require 'oculus/presenters'
 
 module Oculus
   class Server < Sinatra::Base
@@ -21,7 +22,7 @@ module Oculus
     end
 
     get '/' do
-      @queries = Oculus.data_store.all_queries
+      @queries = Oculus.data_store.all_queries.map { |q| Oculus::Presenters::QueryPresenter.new(q) }
 
       erb :index
     end
@@ -43,7 +44,7 @@ module Oculus
     end
 
     get '/queries/:id' do
-      @query = Oculus::Query.find(params[:id])
+      @query = Oculus::Presenters::QueryPresenter.new(Oculus::Query.find(params[:id]))
 
       @headers, *@results = @query.results
 
@@ -51,7 +52,7 @@ module Oculus
     end
 
     get '/queries/:id/loading' do
-      @query = Oculus::Query.find(params[:id])
+      @query = Oculus::Presenters::QueryPresenter.new(Oculus::Query.find(params[:id]))
 
       erb :loading
     end

@@ -29,10 +29,6 @@ module Oculus
       !results.nil? && !results.empty?
     end
 
-    def formatted_date
-      date.strftime("%Y-%m-%d %H:%M") if date
-    end
-
     class << self
       def create(attributes)
         query = new(attributes)
