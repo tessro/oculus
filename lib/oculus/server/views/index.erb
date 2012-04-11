@@ -1,4 +1,10 @@
 <% @current_tab = 'home' %>
+
+<div class="alert alert-info">
+  <i class="icon icon-off"></i>
+  Connected to database '<%= Oculus.connection_options[:database] %>' on <%= Oculus.connection_options[:host] %>:<%= Oculus.connection_options[:port] %>.
+</div>
+
 <form id="query-form" method="POST" action="/queries" class="well form-horizontal">
   <fieldset>
     <div class="control-group">
