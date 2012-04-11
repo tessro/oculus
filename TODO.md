@@ -5,6 +5,7 @@
 * Input validation
 * Error handling
 * Data download
+* Cancelable queries
 
 ## Eventually (1.1 or later)
 
