@@ -1,14 +1,9 @@
 require 'sinatra/base'
-require 'sinatra/reloader'
 require 'oculus'
 require 'oculus/presenters'
 
 module Oculus
   class Server < Sinatra::Base
-    configure :development do
-      register Sinatra::Reloader
-    end
-
     set :root, File.dirname(File.expand_path(__FILE__))
 
     set :static, true
