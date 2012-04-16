@@ -5,7 +5,7 @@ body {
 .CodeMirror {
   width: 600px;
   font-size: 16px;
-  cursor: default;
+  cursor: text;
 
   /* ported from Bootstrap 2.0.2 */
   background: #fff;
