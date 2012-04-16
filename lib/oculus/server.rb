@@ -53,7 +53,7 @@ module Oculus
     end
 
     get '/queries/:id/ready' do
-      Oculus::Query.find(params[:id]).ready?.to_s
+      Oculus::Query.find(params[:id]).complete?.to_s
     end
 
     delete '/queries/:id' do

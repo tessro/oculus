@@ -15,13 +15,19 @@ describe Oculus::Presenters::QueryPresenter do
     presenter.formatted_date.should == '2010-01-01 12:34'
   end
 
-  it "reports finished queries" do
-    query.stub(:ready?).and_return(true)
+  it "reports successful queries" do
+    query.stub(:complete?).and_return(true)
     presenter.status.should == 'done'
   end
 
+  it "reports failed queries" do
+    query.stub(:complete?).and_return(true)
+    query.stub(:error).and_return("you fail")
+    presenter.status.should == 'error'
+  end
+
   it "reports loading queries" do
-    query.stub(:ready?).and_return(false)
+    query.stub(:complete?).and_return(false)
     presenter.status.should == 'loading'
   end
 end

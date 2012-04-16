@@ -9,7 +9,7 @@
 
 <pre class="cm-s-default"><%= @query.query %></pre>
 
-<% if @query.ready? %>
+<% if @query.succeeded? %>
   <table id="results-table">
     <thead>
       <tr>
@@ -28,6 +28,11 @@
       <% end %>
     </tbody>
   </table>
+<% elsif @query.error %>
+  <div class="alert alert-error">
+    <strong>Sorry!</strong>
+    <%= @query.error %>
+  </div>
 <% else %>
   <div class="alert alert-info">
     <strong>Head's Up!</strong>

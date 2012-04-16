@@ -8,8 +8,12 @@ module Oculus
       end
 
       def status
-        if ready?
-          "done"
+        if complete?
+          if error
+            "error"
+          else
+            "done"
+          end
         else
           "loading"
         end

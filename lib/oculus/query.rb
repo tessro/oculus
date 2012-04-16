@@ -36,8 +36,12 @@ module Oculus
       Oculus.data_store.save_query(self)
     end
 
-    def ready?
-      !results.nil? && !results.empty?
+    def complete?
+      !!error || (!results.nil? && !results.empty?)
+    end
+
+    def succeeded?
+      complete? && !error
     end
 
     class << self

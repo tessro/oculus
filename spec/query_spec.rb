@@ -70,13 +70,33 @@ describe Oculus::Query do
     Oculus::Query.find(1)
   end
 
-  it "is not ready when no results are present" do
+  it "is not complete when no results are present" do
     query = Oculus::Query.new(:query => 'SELECT * FROM users')
-    query.should_not be_ready
+    query.should_not be_complete
   end
 
-  it "is ready when results are present" do
+  it "is complete when results are present" do
     query = Oculus::Query.new(:results => [['id', 'name'], [1, 'Paul']])
-    query.should be_ready
+    query.should be_complete
+  end
+
+  it "is complete when there is an error" do
+    query = Oculus::Query.new(:error => "That's not how to write SQL")
+    query.should be_complete
+  end
+
+  it "is not successful when it's not complete" do
+    query = Oculus::Query.new(:query => 'SELECT * FROM users')
+    query.succeeded?.should be false
+  end
+
+  it "is successful when results are present" do
+    query = Oculus::Query.new(:results => [['id', 'name'], [1, 'Paul']])
+    query.succeeded?.should be true
+  end
+
+  it "is not successful when there is an error" do
+    query = Oculus::Query.new(:error => "That's not how to write SQL")
+    query.succeeded?.should be false
   end
 end

@@ -3,7 +3,6 @@
 ## Upcoming (pre-1.0)
 
 * Input validation
-* Error handling
 * Data download
 * Cancelable queries
 
