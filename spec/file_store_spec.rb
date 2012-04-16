@@ -25,7 +25,7 @@ describe Oculus::Storage::FileStore do
   end
 
   before do
-    Dir.mkdir('tmp/test_cache')
+    FileUtils.mkdir_p('tmp/test_cache')
   end
 
   after do
