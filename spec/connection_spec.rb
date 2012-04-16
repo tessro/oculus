@@ -2,7 +2,7 @@ require 'oculus'
 
 describe Oculus::Connection do
   before(:all) do
-    client = Mysql2::Client.new(:host => "localhost", :username => "root", :database => "test")
+    client = Mysql2::Client.new(:host => "localhost", :username => "root")
     client.query "CREATE DATABASE IF NOT EXISTS test"
     client.query "USE test"
     client.query %[
