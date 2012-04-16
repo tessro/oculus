@@ -15,7 +15,7 @@ end
 
 When /^I click delete$/ do
   visit '/'
-  click_link 'delete'
+  find('.delete').click
 end
 
 Then /^I should see (\d+) rows of results$/ do |result_count|
