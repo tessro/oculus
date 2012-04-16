@@ -14,7 +14,7 @@ Oculus.connection_options = {
 }
 
 Before do
-  Dir.mkdir('tmp/test_cache')
+  FileUtils.mkdir_p('tmp/test_cache')
 end
 
 After do
