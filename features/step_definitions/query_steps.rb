@@ -4,7 +4,7 @@ end
 
 When /^I execute "([^"]*)"$/ do |query|
   visit '/'
-  fill_in('query', :with => query)
+  find('.CodeMirror :first-child :first-child').native.send_keys(query)
   click_button 'Run'
 end
 
