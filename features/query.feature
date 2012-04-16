@@ -14,7 +14,7 @@ Feature: Users can query the database
     When I load the cached query
     Then I should see 3 rows of results
 
-  @wip @javascript
+  @javascript
   Scenario: Deleting a query
     Given a query is cached with results:
       | id | users |
