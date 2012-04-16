@@ -5,6 +5,7 @@ module Oculus
     attr_accessor :author
     attr_accessor :query
     attr_accessor :results
+    attr_accessor :error
     attr_accessor :date
 
     def initialize(attributes = {})
@@ -14,10 +15,20 @@ module Oculus
     end
 
     def attributes
-      { :description => description,
+      attrs = {
+        :description => description,
         :author      => author,
         :query       => query,
-        :date        => date }
+        :date        => date
+      }
+      attrs[:error] = error if error
+      attrs
+    end
+
+    def execute(connection)
+      self.results = connection.execute(query)
+    rescue Connection::Error => e
+      self.error = e.message
     end
 
     def save

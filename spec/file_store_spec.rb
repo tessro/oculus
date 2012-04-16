@@ -17,6 +17,13 @@ describe Oculus::Storage::FileStore do
                       :results     => [['id', 'users'], ['2', 'Amy']])
   end
 
+  let(:broken_query) do
+    Oculus::Query.new(:description => "Admin users",
+                      :query       => "FOO BAZ QUUX",
+                      :author      => "Paul",
+                      :error       => "You have an error in your SQL syntax")
+  end
+
   before do
     Dir.mkdir('tmp/test_cache')
   end
@@ -33,6 +40,16 @@ describe Oculus::Storage::FileStore do
     subject.load_query(query.id).date.should == query.date
     subject.load_query(query.id).author.should == query.author
     subject.load_query(query.id).id.should == query.id
+  end
+
+  it "round-trips a query with an error to disk" do
+    subject.save_query(broken_query)
+    subject.load_query(broken_query.id).results.should == []
+    subject.load_query(broken_query.id).error.should == broken_query.error
+    subject.load_query(broken_query.id).query.should == broken_query.query
+    subject.load_query(broken_query.id).date.should == broken_query.date
+    subject.load_query(broken_query.id).author.should == broken_query.author
+    subject.load_query(broken_query.id).id.should == broken_query.id
   end
 
   it "round-trips a query to disk" do

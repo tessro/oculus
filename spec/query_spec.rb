@@ -5,6 +5,28 @@ describe Oculus::Query do
     Oculus.data_store = stub
   end
 
+  it "runs the query against the supplied connection" do
+    connection = stub
+    query = Oculus::Query.new(:query => 'SELECT * FROM users')
+    connection.should_receive(:execute).with('SELECT * FROM users')
+    query.execute(connection)
+  end
+
+  it "stores the results of running the query" do
+    connection = stub(:execute => [['id', 'name'], [1, 'Paul']])
+    query = Oculus::Query.new(:query => 'SELECT * FROM users')
+    query.execute(connection)
+    query.results.should == [['id', 'name'], [1, 'Paul']]
+  end
+
+  it "stores errors when queries fail" do
+    connection = stub
+    query = Oculus::Query.new(:query => 'SELECT * FROM users')
+    connection.stub(:execute).and_raise(Oculus::Connection::Error.new('You have an error in your SQL syntax'))
+    query.execute(connection)
+    query.error.should == 'You have an error in your SQL syntax'
+  end
+
   it "stores the query itself" do
     query = Oculus::Query.new(:query => 'SELECT * FROM users')
     query.query.should == 'SELECT * FROM users'
