@@ -7,6 +7,11 @@ require 'capybara/cucumber'
 Capybara.app = Oculus::Server
 
 Oculus.cache_path = 'tmp/test_cache'
+Oculus.connection_options = {
+  :host => 'localhost',
+  :username => 'root',
+  :database => 'test'
+}
 
 Before do
   Dir.mkdir('tmp/test_cache')
