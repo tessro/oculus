@@ -3,12 +3,14 @@ require 'oculus'
 describe Oculus::Connection do
   before(:all) do
     client = Mysql2::Client.new(:host => "localhost", :username => "root", :database => "test")
+    client.query "CREATE DATABASE IF NOT EXISTS test"
+    client.query "USE test"
     client.query %[
       CREATE TABLE IF NOT EXISTS oculus_users (
         id MEDIUMINT NOT NULL AUTO_INCREMENT,
         name VARCHAR(255),
         PRIMARY KEY (id)
-      )
+      );
   ]
 
     client.query 'TRUNCATE oculus_users'
