@@ -13,6 +13,10 @@ module Oculus
       rescue ::Mysql2::Error => e
         raise Connection::Error.new(e.message)
       end
+
+      def thread_id
+        @connection.thread_id
+      end
     end
   end
 end

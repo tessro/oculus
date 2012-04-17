@@ -7,6 +7,7 @@ module Oculus
     attr_accessor :results
     attr_accessor :error
     attr_accessor :date
+    attr_accessor :thread_id
 
     def initialize(attributes = {})
       attributes.each do |attr, value|
@@ -19,7 +20,8 @@ module Oculus
         :description => description,
         :author      => author,
         :query       => query,
-        :date        => date
+        :date        => date,
+        :thread_id   => thread_id
       }
       attrs[:error] = error if error
       attrs

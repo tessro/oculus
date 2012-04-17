@@ -31,4 +31,8 @@ describe Oculus::Connection do
       subject.execute("FOO BAZ QUUX")
     }.should raise_error(Oculus::Connection::Error)
   end
+
+  it "provides the connection's thread_id" do
+    subject.thread_id.should be_an Integer
+  end
 end

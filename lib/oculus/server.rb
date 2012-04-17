@@ -23,12 +23,13 @@ module Oculus
     end
 
     post '/queries' do
+      connection = Oculus::Connection::Mysql2.new(Oculus.connection_options)
       query = Oculus::Query.create(:author      => params[:author],
                                    :description => params[:description],
-                                   :query       => params[:query])
+                                   :query       => params[:query],
+                                   :thread_id   => connection.thread_id)
 
       pid = fork do
-        connection = Oculus::Connection::Mysql2.new(Oculus.connection_options)
         query.execute(connection)
         query.save
       end

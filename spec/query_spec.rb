@@ -32,6 +32,11 @@ describe Oculus::Query do
     query.query.should == 'SELECT * FROM users'
   end
 
+  it "stores the querying connection's thread ID" do
+    query = Oculus::Query.new(:thread_id => 42)
+    query.thread_id.should == 42
+  end
+
   it "has a date" do
     query = Oculus::Query.new
     query.date.should be nil

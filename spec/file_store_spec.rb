@@ -7,6 +7,7 @@ describe Oculus::Storage::FileStore do
     Oculus::Query.new(:description => "All users",
                       :query       => "SELECT * FROM oculus_users",
                       :author      => "Paul",
+                      :thread_id   => 42,
                       :results     => [['id', 'users'], ['1', 'Paul'], ['2', 'Amy']])
   end
 
@@ -14,6 +15,7 @@ describe Oculus::Storage::FileStore do
     Oculus::Query.new(:description => "Admin users",
                       :query       => "SELECT * FROM oculus_users WHERE is_admin = 1",
                       :author      => "Paul",
+                      :thread_id   => 42,
                       :results     => [['id', 'users'], ['2', 'Amy']])
   end
 
@@ -21,6 +23,7 @@ describe Oculus::Storage::FileStore do
     Oculus::Query.new(:description => "Admin users",
                       :query       => "FOO BAZ QUUX",
                       :author      => "Paul",
+                      :thread_id   => 42,
                       :error       => "You have an error in your SQL syntax")
   end
 
@@ -40,6 +43,7 @@ describe Oculus::Storage::FileStore do
     subject.load_query(query.id).date.should == query.date
     subject.load_query(query.id).author.should == query.author
     subject.load_query(query.id).id.should == query.id
+    subject.load_query(query.id).thread_id.should == query.thread_id
   end
 
   it "round-trips a query with an error to disk" do
@@ -50,6 +54,7 @@ describe Oculus::Storage::FileStore do
     subject.load_query(broken_query.id).date.should == broken_query.date
     subject.load_query(broken_query.id).author.should == broken_query.author
     subject.load_query(broken_query.id).id.should == broken_query.id
+    subject.load_query(broken_query.id).thread_id.should == broken_query.thread_id
   end
 
   it "round-trips a query to disk" do
@@ -59,6 +64,7 @@ describe Oculus::Storage::FileStore do
     subject.load_query(query.id).date.should == query.date
     subject.load_query(query.id).author.should == query.author
     subject.load_query(query.id).id.should == query.id
+    subject.load_query(query.id).thread_id.should == query.thread_id
   end
 
   it "doesn't overwrite an existing query id when saving" do
