@@ -43,6 +43,18 @@ describe Oculus::Connection do
     }.should raise_error(Oculus::Connection::Error)
   end
 
+  it "raises a Connection::Error when the query is interrupted" do
+    thread_id = subject.thread_id
+    Thread.new {
+      sleep 0.1
+      Mysql2::Client.new(:host => "localhost", :username => "root").query("KILL QUERY #{thread_id}")
+    }
+
+    lambda {
+      subject.execute("SELECT * FROM oculus_users WHERE SLEEP(2)")
+    }.should raise_error(Oculus::Connection::Error)
+  end
+
   it "provides the connection's thread_id" do
     subject.thread_id.should be_an Integer
   end

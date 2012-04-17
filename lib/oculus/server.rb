@@ -22,6 +22,13 @@ module Oculus
       erb :index
     end
 
+    post '/queries/:id/cancel' do
+      query = Oculus::Query.find(params[:id])
+      connection = Oculus::Connection::Mysql2.new(Oculus.connection_options)
+      connection.execute("KILL QUERY #{query.thread_id}")
+      [200, "OK"]
+    end
+
     post '/queries' do
       connection = Oculus::Connection::Mysql2.new(Oculus.connection_options)
       query = Oculus::Query.create(:author      => params[:author],

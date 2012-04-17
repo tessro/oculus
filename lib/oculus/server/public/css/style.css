@@ -93,3 +93,8 @@ body {
 .status .indicator-loading {
   background: #fc0;
 }
+
+#query-actions {
+  text-align: right;
+  margin-top: 10px;
+}

@@ -2,6 +2,21 @@
   var queryId    = window.location.href.match(/\/queries\/([0-9]+)\/loading/)[1];
   var statusUrl  = '/queries/' + queryId + '/ready';
   var resultsUrl = '/queries/' + queryId;
+  var cancelUrl  = '/queries/' + queryId + '/cancel';
+
+  $(function() {
+    $('#query-actions .cancel').click(function(e) {
+      var btn = $(this);
+
+      if (!btn.hasClass('disabled')) {
+        btn.addClass('disabled');
+
+        $.post(cancelUrl, function() {
+          window.location.href = resultsUrl;
+        });
+      }
+    });
+  });
 
   function poll() {
     $.ajax({
@@ -70,3 +85,7 @@
 <div id="elapsed-time"></div>
 
 <pre class="cm-s-default"><%= @query.query %></pre>
+
+<div id="query-actions">
+  <a class="btn cancel"><i class="icon-remove"></i> Cancel</a>
+</div>
