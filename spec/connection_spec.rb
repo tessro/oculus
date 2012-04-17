@@ -26,6 +26,17 @@ describe Oculus::Connection do
     subject.execute("SELECT * FROM oculus_users").should == [['id', 'name'], [1, 'Paul'], [2, 'Amy'], [3, 'Peter']]
   end
 
+  it "returns nil for queries that don't return result sets" do
+    query_connection = Mysql2::Client.new(:host => "localhost", :database => "test")
+    thread_id = query_connection.thread_id
+    Thread.new {
+      query_connection.execute("SELECT * FROM oculus_users WHERE SLEEP(2)")
+    }
+
+    sleep 0.1
+    subject.execute("KILL QUERY #{thread_id}").should be_nil
+  end
+
   it "raises a Connection::Error on syntax errors" do
     lambda {
       subject.execute("FOO BAZ QUUX")

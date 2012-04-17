@@ -9,7 +9,7 @@ module Oculus
 
       def execute(sql)
         results = @connection.query(sql)
-        [results.fields] + results.map(&:values)
+        [results.fields] + results.map(&:values) if results
       rescue ::Mysql2::Error => e
         raise Connection::Error.new(e.message)
       end
