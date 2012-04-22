@@ -30,4 +30,10 @@ describe Oculus::Presenters::QueryPresenter do
     query.stub(:complete?).and_return(false)
     presenter.status.should == 'loading'
   end
+
+  it "uses SQL for a description when there isn't one" do
+    query.description = nil
+    query.query = "SELECT * FROM foo"
+    presenter.description.should == "SELECT * FROM foo"
+  end
 end

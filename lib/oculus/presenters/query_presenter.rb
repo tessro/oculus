@@ -18,6 +18,20 @@ module Oculus
           "loading"
         end
       end
+
+      def description
+        description = __getobj__.description
+        if description && description != ""
+          description
+        else
+          query = __getobj__.query
+          if query.length > 100
+            "#{query[0..97]}..."
+          else
+            query
+          end
+        end
+      end
     end
   end
 end
