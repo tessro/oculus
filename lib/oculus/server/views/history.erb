@@ -1,0 +1,35 @@
+<% @current_tab = 'history' %>
+
+<h2>Query History</h2>
+<table class="table">
+  <thead>
+    <th></th>
+    <th>Timestamp</th>
+    <th>Query</th>
+    <th>Author</th>
+    <th></th>
+  </thead>
+  <tbody id="history">
+    <% @queries.each do |query| %>
+      <tr>
+        <td class="status"><span class="indicator indicator-<%= query.status %>">*</span></td>
+        <td class="date"><%= query.formatted_date %></td>
+        <td>
+          <a href="/queries/<%= query.id %>"><%= query.description %></a>
+        </td>
+        <td class="author">
+          <%= query.author %>
+        </td>
+        <td>
+          <a class="delete" href="/queries/<%= query.id %>"><i class="icon-remove"></i></a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  CodeMirror.fromTextArea(document.getElementById('query-field'), {
+    tabSize: 2
+  });
+</script>

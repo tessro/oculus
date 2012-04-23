@@ -17,9 +17,13 @@ module Oculus
     end
 
     get '/' do
+      erb :index
+    end
+
+    get '/history' do
       @queries = Oculus.data_store.all_queries.map { |q| Oculus::Presenters::QueryPresenter.new(q) }
 
-      erb :index
+      erb :history
     end
 
     post '/queries/:id/cancel' do
