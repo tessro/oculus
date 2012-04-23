@@ -93,3 +93,7 @@ body {
   height: 13px;
   margin-right: 10px;
 }
+
+.deemphasized {
+  color: #999;
+}
