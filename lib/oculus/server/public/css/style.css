@@ -57,20 +57,6 @@ body {
   font-size: 14px;
 }
 
-#loading {
-  margin-top: 100px;
-  text-align: center;
-  font-family: Courier, fixed;
-  font-size: 40px;
-}
-
-#elapsed-time {
-  margin: 40px auto;
-  text-align: center;
-  font-family: Courier, fixed;
-  font-size: 24px;
-}
-
 .status .indicator {
   text-indent: -9999px;
   display: inline-block;
@@ -97,4 +83,13 @@ body {
 #query-actions {
   text-align: right;
   margin-top: 10px;
+}
+
+#spinner {
+  display: block;
+  float: left;
+  padding-top: 3px;
+  width: 13px;
+  height: 13px;
+  margin-right: 10px;
 }

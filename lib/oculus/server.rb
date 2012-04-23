@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'oculus'
 require 'oculus/presenters'
+require 'json'
 
 module Oculus
   class Server < Sinatra::Base
@@ -47,7 +48,17 @@ module Oculus
 
       Process.detach(pid)
 
-      redirect "/queries/#{query.id}/loading"
+      [201, { :id => query.id }.to_json]
+    end
+
+    get '/queries/:id.json' do
+      query = Oculus::Query.find(params[:id])
+
+      if query.error
+        { :error => query.error }
+      else
+        { :results => query.results }
+      end.to_json
     end
 
     get '/queries/:id' do
@@ -58,14 +69,8 @@ module Oculus
       erb :show
     end
 
-    get '/queries/:id/loading' do
-      @query = Oculus::Presenters::QueryPresenter.new(Oculus::Query.find(params[:id]))
-
-      erb :loading
-    end
-
-    get '/queries/:id/ready' do
-      Oculus::Query.find(params[:id]).complete?.to_s
+    get '/queries/:id/status' do
+      Oculus::Presenters::QueryPresenter.new(Oculus::Query.find(params[:id])).status
     end
 
     delete '/queries/:id' do

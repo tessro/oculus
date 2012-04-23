@@ -35,38 +35,86 @@
   </fieldset>
 </form>
 
-<section id="history">
-  <h2>Query History</h2>
+<div id="loading">
+  <div class="alert">
+    <span id="spinner"></span>
+    Executing query...
+  </div>
+</div>
+
+<div id="error" class="alert alert-error">
+  <strong>Problem!</strong>
+  <span class="message"></span>
+</div>
+
+<div id="results">
+  <div class="alert alert-success">
+    <strong>Success!</strong>
+    Query returned <span class="row-count"></span> row<span class="row-count-plural">s</span>.
+  </div>
+
   <table class="table">
     <thead>
-      <th></th>
-      <th>Timestamp</th>
-      <th>Query</th>
-      <th>Author</th>
-      <th></th>
+      <tr class="headers"></tr>
     </thead>
-    <tbody>
-      <% @queries.each do |query| %>
-        <tr>
-          <td class="status"><span class="indicator indicator-<%= query.status %>">*</span></td>
-          <td class="date"><%= query.formatted_date %></td>
-          <td>
-            <a href="/queries/<%= query.id %>"><%= query.description %></a>
-          </td>
-          <td class="author">
-            <%= query.author %>
-          </td>
-          <td>
-            <a class="delete" href="/queries/<%= query.id %>"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
+    <tbody class="results"></tbody>
   </table>
-</section>
+</div>
 
 <script type="text/javascript">
-  CodeMirror.fromTextArea(document.getElementById('query-field'), {
-    tabSize: 2
+  var opts = {
+    lines: 11,
+    length: 4,
+    width: 2,
+    radius: 4,
+    color: '#C09853',
+    speed: 1.2,
+    trail: 60
+  };
+  var target = document.getElementById('spinner');
+  var spinner = new Spinner(opts).spin(target);
+
+  var form = $('#query-form');
+  $('#results, #error, #loading').hide();
+  var editor = new QueryEditor(form, {
+    onQueryStart: function() {
+      $('#results, #error').hide();
+      $('#loading').show();
+    },
+    onQuerySuccess: function(query) {
+      $('#loading, #error').hide();
+      $('#results')
+        .show()
+        .find('.row-count')
+          .text(query.results.length - 1)
+        .end()
+        .find('.row-count-plural')
+          .toggle(query.results.length !== 2);
+
+      var headerRow = $('#results .headers').empty();
+      var container = $('#results .results').empty();
+
+      for (var i = 0; i < query.results[0].length; i++) {
+        headerRow.append('<th>' + query.results[0][i] + '</th>');
+      }
+
+      for (var i = 1; i < query.results.length; i++) {
+        var result = query.results[i];
+        var row = $('<tr></tr>');
+
+        for (var j = 0; j < result.length; j++) {
+          row.append('<td>' + result[j] + '</td>');
+        }
+
+        container.append(row);
+      }
+    },
+    onQueryError: function(error) {
+      $('#loading, #results').hide();
+      $('#error')
+        .show()
+        .find('.message')
+          .text(error);
+    }
   });
 </script>
