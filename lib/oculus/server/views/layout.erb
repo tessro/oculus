@@ -24,7 +24,9 @@
               <a href="/history">History</a>
             </li>
           </ul>
-          <p class="pull-right navbar-text">No analysis unseen.</p>
+          <div class="pull-right navbar-text">
+            mysql://<%= Oculus.connection_options[:host] %>:<%= Oculus.connection_options[:port] %>/<%= Oculus.connection_options[:database] %>
+          </div>
         </div>
       </div>
     </div>
