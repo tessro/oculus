@@ -25,7 +25,7 @@
             </li>
           </ul>
           <div class="pull-right navbar-text">
-            mysql://<%= Oculus.connection_options[:host] %>:<%= Oculus.connection_options[:port] %>/<%= Oculus.connection_options[:database] %>
+            mysql://<%= Oculus.connection_options[:username] %>@<%= Oculus.connection_options[:host] %>:<%= Oculus.connection_options[:port] %>/<%= Oculus.connection_options[:database] %>
           </div>
         </div>
       </div>
