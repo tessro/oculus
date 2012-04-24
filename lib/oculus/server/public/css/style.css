@@ -3,7 +3,7 @@ body {
 }
 
 .CodeMirror {
-  width: 600px;
+  width: 930px;
   font-size: 16px;
   cursor: text;
 
@@ -80,8 +80,7 @@ body {
   background: #fc0;
 }
 
-#query-actions {
-  text-align: right;
+#query-form .actions {
   margin-top: 10px;
 }
 

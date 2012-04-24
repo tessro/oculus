@@ -5,35 +5,14 @@
   Connected to database '<%= Oculus.connection_options[:database] %>' on <%= Oculus.connection_options[:host] %>:<%= Oculus.connection_options[:port] %>.
 </div>
 
-<form id="query-form" method="POST" action="/queries" class="well form-horizontal">
-  <fieldset>
-    <div class="control-group">
-      <label class="control-label" for="author">Author:</label>
-      <div class="controls">
-        <input type="text" name="author" placeholder="Who are you?" />
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="description">Description:</label>
-      <div class="controls">
-        <input type="text" name="description" placeholder="What is this query about?" />
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="query">Query:</label>
-      <div class="controls">
-        <div id="editor-container">
-          <textarea name="query" id="query-field"></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <input type="submit" class="btn" name="submit" value="Run" />
-        <span class="deemphasized help-inline">Ctrl+&crarr; or &#8984;&crarr;</span>
-      </div>
-    </div>
-  </fieldset>
+<form id="query-form" method="POST" action="/queries">
+  <div id="editor-container">
+    <textarea name="query" id="query-field"></textarea>
+  </div>
+  <div class="form-actions">
+    <input type="submit" class="btn" name="submit" value="Run" />
+    <span class="deemphasized help-inline">Ctrl+&crarr; or &#8984;&crarr;</span>
+  </div>
 </form>
 
 <div id="loading">
