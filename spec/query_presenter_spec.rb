@@ -36,4 +36,14 @@ describe Oculus::Presenters::QueryPresenter do
     query.query = "SELECT * FROM foo"
     presenter.description.should == "SELECT * FROM foo"
   end
+
+  it "reports that the query has been named" do
+    query.description = "Select all the things"
+    presenter.should be_named
+  end
+
+  it "reports that the query has not been named" do
+    query.description = nil
+    presenter.should_not be_named
+  end
 end

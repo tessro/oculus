@@ -25,12 +25,16 @@ module Oculus
           description
         else
           query = __getobj__.query
-          if query.length > 100
+          if query && query.length > 100
             "#{query[0..97]}..."
           else
             query
           end
         end
+      end
+
+      def named?
+        !!description
       end
     end
   end
