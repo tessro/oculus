@@ -71,6 +71,15 @@ module Oculus
       Oculus::Presenters::QueryPresenter.new(Oculus::Query.find(params[:id])).status
     end
 
+    put '/queries/:id' do
+      @query = Oculus::Query.find(params[:id])
+      @query.name   = params[:name]
+      @query.author = params[:author]
+      @query.save
+
+      puts "true"
+    end
+
     delete '/queries/:id' do
       Oculus.data_store.delete_query(params[:id])
       puts "true"

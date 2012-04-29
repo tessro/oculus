@@ -1,11 +1,24 @@
-<h1><%= @query.description %></h1>
+<h1 class="description"><%= @query.description %></h1>
 
-<dl class="dl-horizontal">
+<div id="query-actions">
+  <button class="btn edit<% unless @query.named? %> active<% end %>" data-toggle="button">
+    <i class="icon-pencil"></i>
+    Edit
+  </button>
+</div>
+
+<dl class="dl-horizontal query-properties">
   <dt>Author</dt>
-  <dd><%= @query.author %></dd>
+  <dd class="author"><%= @query.author %>&nbsp;</dd>
   <dt>Timestamp</dt>
   <dd><%= @query.formatted_date %></dd>
 </dl>
+
+<form class="well form-inline" id="query-properties-form">
+  <input type="text" class="input-small author" name="author" placeholder="Author" value="<%= @query.author %>" />
+  <input type="text" class="span8 name" name="name" placeholder="Description" value="<%= @query.name %>" />
+  <input type="submit" class="btn" name="submit" value="Save" />
+</form>
 
 <pre class="cm-s-default"><%= @query.query %></pre>
 

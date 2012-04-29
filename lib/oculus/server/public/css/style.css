@@ -96,3 +96,12 @@ body {
 .deemphasized {
   color: #999;
 }
+
+#query-actions {
+  float: right;
+  margin-top: 1em;
+}
+
+#query-properties-form {
+  display: none;
+}
