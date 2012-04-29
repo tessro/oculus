@@ -49,9 +49,9 @@ describe Oculus::Query do
     query.date.should == now
   end
 
-  it "has a description" do
-    query = Oculus::Query.new(:description => 'foo')
-    query.description.should == 'foo'
+  it "has a name" do
+    query = Oculus::Query.new(:name => 'foo')
+    query.name.should == 'foo'
   end
 
   it "has an author" do

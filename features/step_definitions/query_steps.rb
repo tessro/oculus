@@ -1,5 +1,5 @@
 Given /^a query is cached with results:$/ do |results|
-  Oculus::Query.create(:description => "all users", :query => "SELECT * FROM oculus_users", :results => results.raw)
+  Oculus::Query.create(:name => "all users", :query => "SELECT * FROM oculus_users", :results => results.raw)
 end
 
 When /^I execute "([^"]*)"$/ do |query|

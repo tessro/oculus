@@ -4,27 +4,27 @@ describe Oculus::Storage::FileStore do
   subject { Oculus::Storage::FileStore.new('tmp/test_cache') }
 
   let(:query) do
-    Oculus::Query.new(:description => "All users",
-                      :query       => "SELECT * FROM oculus_users",
-                      :author      => "Paul",
-                      :thread_id   => 42,
-                      :results     => [['id', 'users'], ['1', 'Paul'], ['2', 'Amy']])
+    Oculus::Query.new(:name      => "All users",
+                      :query     => "SELECT * FROM oculus_users",
+                      :author    => "Paul",
+                      :thread_id => 42,
+                      :results   => [['id', 'users'], ['1', 'Paul'], ['2', 'Amy']])
   end
 
   let(:other_query) do
-    Oculus::Query.new(:description => "Admin users",
-                      :query       => "SELECT * FROM oculus_users WHERE is_admin = 1",
-                      :author      => "Paul",
-                      :thread_id   => 42,
-                      :results     => [['id', 'users'], ['2', 'Amy']])
+    Oculus::Query.new(:name      => "Admin users",
+                      :query     => "SELECT * FROM oculus_users WHERE is_admin = 1",
+                      :author    => "Paul",
+                      :thread_id => 42,
+                      :results   => [['id', 'users'], ['2', 'Amy']])
   end
 
   let(:broken_query) do
-    Oculus::Query.new(:description => "Admin users",
-                      :query       => "FOO BAZ QUUX",
-                      :author      => "Paul",
-                      :thread_id   => 42,
-                      :error       => "You have an error in your SQL syntax")
+    Oculus::Query.new(:name      => "Admin users",
+                      :query     => "FOO BAZ QUUX",
+                      :author    => "Paul",
+                      :thread_id => 42,
+                      :error     => "You have an error in your SQL syntax")
   end
 
   before do
@@ -36,7 +36,7 @@ describe Oculus::Storage::FileStore do
   end
 
   it "round-trips a query with no results to disk" do
-    query = Oculus::Query.new(:description => "Unfinished query", :author => "Me")
+    query = Oculus::Query.new(:name => "Unfinished query", :author => "Me")
     subject.save_query(query)
     subject.load_query(query.id).results.should == []
     subject.load_query(query.id).query.should == query.query
@@ -89,7 +89,7 @@ describe Oculus::Storage::FileStore do
 
   it "deletes queries" do
     subject.save_query(query)
-    subject.load_query(query.id).description.should == query.description
+    subject.load_query(query.id).name.should == query.name
     subject.delete_query(query.id)
 
     lambda {

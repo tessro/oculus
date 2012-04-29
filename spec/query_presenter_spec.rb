@@ -6,7 +6,7 @@ describe Oculus::Presenters::QueryPresenter do
   let(:presenter) { Oculus::Presenters::QueryPresenter.new(query) }
 
   it "should delegate to the underlying query" do
-    query.description = 'foo'
+    query.name = 'foo'
     presenter.description.should == 'foo'
   end
 
@@ -31,19 +31,24 @@ describe Oculus::Presenters::QueryPresenter do
     presenter.status.should == 'loading'
   end
 
-  it "uses SQL for a description when there isn't one" do
-    query.description = nil
+  it "uses name for a description when there is one" do
+    query.name = "foo"
+    presenter.description.should == "foo"
+  end
+
+  it "uses SQL for a description when there isn't a name" do
+    query.name = nil
     query.query = "SELECT * FROM foo"
     presenter.description.should == "SELECT * FROM foo"
   end
 
   it "reports that the query has been named" do
-    query.description = "Select all the things"
+    query.name = "Select all the things"
     presenter.should be_named
   end
 
   it "reports that the query has not been named" do
-    query.description = nil
+    query.name = nil
     presenter.should_not be_named
   end
 end

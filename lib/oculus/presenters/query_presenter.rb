@@ -20,11 +20,10 @@ module Oculus
       end
 
       def description
-        description = __getobj__.description
-        if description && description != ""
-          description
+        if name && name != ""
+          name
         else
-          query = __getobj__.query
+          query = self.query
           if query && query.length > 100
             "#{query[0..97]}..."
           else
@@ -34,7 +33,7 @@ module Oculus
       end
 
       def named?
-        !!description
+        !!name
       end
     end
   end
