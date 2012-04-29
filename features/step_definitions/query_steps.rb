@@ -2,6 +2,10 @@ Given /^a query is cached with results:$/ do |results|
   Oculus::Query.create(:name => "all users", :query => "SELECT * FROM oculus_users", :results => results.raw)
 end
 
+Given /^I am on the history page$/ do
+  visit '/history'
+end
+
 When /^I execute "([^"]*)"$/ do |query|
   visit '/'
   find('.CodeMirror :first-child :first-child').native.send_keys(query)
@@ -9,17 +13,17 @@ When /^I execute "([^"]*)"$/ do |query|
 end
 
 When /^I load the cached query$/ do
-  visit '/'
+  visit '/history'
   click_link 'all users'
 end
 
 When /^I click delete$/ do
-  visit '/'
   find('.delete').click
 end
 
 Then /^I should see (\d+) rows of results$/ do |result_count|
-  within('#results') do
+  page.has_css?("tbody", :visible => true)
+  within('tbody') do
     all('tr').length.should == result_count.to_i
   end
 end

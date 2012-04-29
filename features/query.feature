@@ -21,5 +21,6 @@ Feature: Users can query the database
       | 1  | Paul  |
       | 2  | Amy   |
       | 3  | Peter |
+    And I am on the history page
     When I click delete
     Then I should not see any queries
