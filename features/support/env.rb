@@ -5,6 +5,7 @@ require 'oculus/server'
 require 'capybara/cucumber'
 
 Capybara.app = Oculus::Server
+Capybara.default_wait_time = 10
 
 Oculus.cache_path = 'tmp/test_cache'
 Oculus.connection_options = {
