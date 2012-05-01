@@ -22,8 +22,8 @@ When /^I click delete$/ do
 end
 
 Then /^I should see (\d+) rows of results$/ do |result_count|
-  page.has_css?("tbody", :visible => true)
-  within('tbody') do
+  page.has_css?(".results", :visible => true)
+  within('.results') do
     all('tr').length.should == result_count.to_i
   end
 end

@@ -23,7 +23,7 @@
 <pre class="cm-s-default"><%= @query.query %></pre>
 
 <% if @query.succeeded? %>
-  <table id="results-table">
+  <table class="table table-condensed" id="results-table">
     <thead>
       <tr>
         <% @headers.each do |label| %>
@@ -31,7 +31,7 @@
         <% end %>
       </tr>
     </thead>
-    <tbody id="results">
+    <tbody class="results">
       <% @results.each do |result| %>
         <tr>
           <% result.each do |value| %>
