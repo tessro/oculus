@@ -87,7 +87,7 @@ module Oculus
           rewind
 
           section  = 0
-          section += 1 if gets == "---\n" until section == 2
+          section += 1 if gets.rstrip == "---" until section == 2 || eof?
 
           CSV.new(read).to_a
         end
