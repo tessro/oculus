@@ -1,33 +1,14 @@
 require 'oculus'
 
 describe Oculus::Connection do
-  before(:all) do
-    client = Mysql2::Client.new(:host => "localhost", :username => "root")
-    client.query "CREATE DATABASE IF NOT EXISTS test"
-    client.query "USE test"
-    client.query %[
-      CREATE TABLE IF NOT EXISTS oculus_users (
-        id MEDIUMINT NOT NULL AUTO_INCREMENT,
-        name VARCHAR(255),
-        PRIMARY KEY (id)
-      );
-  ]
-
-    client.query 'TRUNCATE oculus_users'
-
-    client.query %[
-      INSERT INTO oculus_users (name) VALUES ('Paul'), ('Amy'), ('Peter')
-    ]
-  end
-
-  subject { Oculus::Connection::Mysql2.new(:database => 'test') }
+  subject { Oculus::Connection::Mysql2.new(:host => 'localhost', :database => 'oculus_test', :username => 'root') }
 
   it "fetches a result set" do
     subject.execute("SELECT * FROM oculus_users").should == [['id', 'name'], [1, 'Paul'], [2, 'Amy'], [3, 'Peter']]
   end
 
   it "returns nil for queries that don't return result sets" do
-    query_connection = Mysql2::Client.new(:host => "localhost", :database => "test")
+    query_connection = Mysql2::Client.new(:host => "localhost", :database => "oculus_test", :username => "root")
     thread_id = query_connection.thread_id
     Thread.new {
       query_connection.execute("SELECT * FROM oculus_users WHERE SLEEP(2)")

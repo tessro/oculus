@@ -10,7 +10,7 @@ Oculus.cache_path = 'tmp/test_cache'
 Oculus.connection_options = {
   :host => 'localhost',
   :username => 'root',
-  :database => 'test'
+  :database => 'oculus_test'
 }
 
 Before do
