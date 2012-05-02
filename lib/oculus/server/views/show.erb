@@ -25,24 +25,31 @@
 <pre class="cm-s-default"><%= @query.query %></pre>
 
 <% if @query.succeeded? %>
-  <table class="table table-condensed" id="results-table">
-    <thead>
-      <tr>
-        <% @headers.each do |label| %>
-          <th><%= label %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody class="results">
-      <% @results.each do |result| %>
+  <% if @headers %>
+    <table class="table table-condensed" id="results-table">
+      <thead>
         <tr>
-          <% result.each do |value| %>
-            <td><%= value %></td>
+          <% @headers.each do |label| %>
+            <th><%= label %></th>
           <% end %>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="results">
+        <% @results.each do |result| %>
+          <tr>
+            <% result.each do |value| %>
+              <td><%= value %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-success">
+      <strong>Heads Up!</strong>
+      This query ran successfully, but returned no results.
+    </div>
+  <% end %>
 <% elsif @query.error %>
   <div class="alert alert-error">
     <strong>Sorry!</strong>
