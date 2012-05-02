@@ -10,8 +10,10 @@
 <dl class="dl-horizontal query-properties">
   <dt>Author</dt>
   <dd class="author"><%= @query.author %>&nbsp;</dd>
-  <dt>Timestamp</dt>
-  <dd><%= @query.formatted_date %></dd>
+  <dt>Started at</dt>
+  <dd><%= @query.formatted_start_time %></dd>
+  <dt>Finished at</dt>
+  <dd><%= @query.formatted_finish_time %></dd>
 </dl>
 
 <form class="well form-inline" id="query-properties-form">

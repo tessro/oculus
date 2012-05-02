@@ -3,8 +3,12 @@ require 'delegate'
 module Oculus
   module Presenters
     class QueryPresenter < SimpleDelegator
-      def formatted_date
-        date.strftime("%Y-%m-%d %H:%M") if date
+      def formatted_start_time
+        started_at.strftime("%Y-%m-%d %H:%M") if started_at
+      end
+
+      def formatted_finish_time
+        finished_at.strftime("%Y-%m-%d %H:%M") if finished_at
       end
 
       def status

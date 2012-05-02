@@ -40,7 +40,8 @@ describe Oculus::Storage::FileStore do
     subject.save_query(query)
     subject.load_query(query.id).results.should == []
     subject.load_query(query.id).query.should == query.query
-    subject.load_query(query.id).date.should == query.date
+    subject.load_query(query.id).started_at.should == query.started_at
+    subject.load_query(query.id).finished_at.should == query.finished_at
     subject.load_query(query.id).author.should == query.author
     subject.load_query(query.id).id.should == query.id
     subject.load_query(query.id).thread_id.should == query.thread_id
@@ -51,7 +52,8 @@ describe Oculus::Storage::FileStore do
     subject.load_query(broken_query.id).results.should == []
     subject.load_query(broken_query.id).error.should == broken_query.error
     subject.load_query(broken_query.id).query.should == broken_query.query
-    subject.load_query(broken_query.id).date.should == broken_query.date
+    subject.load_query(broken_query.id).started_at.should == broken_query.started_at
+    subject.load_query(broken_query.id).finished_at.should == broken_query.finished_at
     subject.load_query(broken_query.id).author.should == broken_query.author
     subject.load_query(broken_query.id).id.should == broken_query.id
     subject.load_query(broken_query.id).thread_id.should == broken_query.thread_id
@@ -61,7 +63,8 @@ describe Oculus::Storage::FileStore do
     subject.save_query(query)
     subject.load_query(query.id).results.should == query.results
     subject.load_query(query.id).query.should == query.query
-    subject.load_query(query.id).date.should == query.date
+    subject.load_query(query.id).started_at.should == query.started_at
+    subject.load_query(query.id).finished_at.should == query.finished_at
     subject.load_query(query.id).author.should == query.author
     subject.load_query(query.id).id.should == query.id
     subject.load_query(query.id).thread_id.should == query.thread_id

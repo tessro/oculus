@@ -1,5 +1,9 @@
 Given /^a query is cached with results:$/ do |results|
-  Oculus::Query.create(:name => "all users", :query => "SELECT * FROM oculus_users", :results => results.raw)
+  Oculus::Query.create(:name        => "all users",
+                       :query       => "SELECT * FROM oculus_users",
+                       :results     => results.raw,
+                       :started_at  => Time.now,
+                       :finished_at => Time.now)
 end
 
 Given /^I am on the history page$/ do

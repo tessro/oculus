@@ -37,16 +37,39 @@ describe Oculus::Query do
     query.thread_id.should == 42
   end
 
-  it "has a date" do
+  it "has a start time" do
     query = Oculus::Query.new
-    query.date.should be nil
+    query.started_at.should be nil
   end
 
-  it "updates date on save" do
-    Oculus.data_store.stub(:save_query)
+  it "has a finish time" do
+    query = Oculus::Query.new
+    query.finished_at.should be nil
+  end
+
+  it "updates start time when executing" do
     Time.stub(:now).and_return(now = stub)
-    query = Oculus::Query.create(:results => [['id', 'name'], [1, 'Paul']])
-    query.date.should == now
+    connection = stub(:execute => [['id', 'name'], [1, 'Paul']])
+    query = Oculus::Query.new(:query => 'SELECT * FROM users')
+    query.execute(connection)
+    query.started_at.should == now
+  end
+
+  it "updates finish time when executing" do
+    Time.stub(:now).and_return(now = stub)
+    connection = stub(:execute => [['id', 'name'], [1, 'Paul']])
+    query = Oculus::Query.new(:query => 'SELECT * FROM users')
+    query.execute(connection)
+    query.finished_at.should == now
+  end
+
+  it "updates finish time when execution fails" do
+    Time.stub(:now).and_return(now = stub)
+    connection = stub
+    connection.stub(:execute).and_raise(Oculus::Connection::Error.new('You have an error in your SQL syntax'))
+    query = Oculus::Query.new(:query => 'SELECT * FROM users')
+    query.execute(connection)
+    query.finished_at.should == now
   end
 
   it "has a name" do
@@ -75,18 +98,23 @@ describe Oculus::Query do
     Oculus::Query.find(1)
   end
 
-  it "is not complete when no results are present" do
+  it "is not complete when it has not been executed" do
     query = Oculus::Query.new(:query => 'SELECT * FROM users')
     query.should_not be_complete
   end
 
-  it "is complete when results are present" do
-    query = Oculus::Query.new(:results => [['id', 'name'], [1, 'Paul']])
+  it "is complete when it has been executed" do
+    connection = stub(:execute => [['id', 'name'], [1, 'Paul']])
+    query = Oculus::Query.new
+    query.execute(connection)
     query.should be_complete
   end
 
   it "is complete when there is an error" do
-    query = Oculus::Query.new(:error => "That's not how to write SQL")
+    connection = stub
+    connection.stub(:execute).and_raise(Oculus::Connection::Error.new('You have an error in your SQL syntax'))
+    query = Oculus::Query.new
+    query.execute(connection)
     query.should be_complete
   end
 
@@ -96,12 +124,17 @@ describe Oculus::Query do
   end
 
   it "is successful when results are present" do
-    query = Oculus::Query.new(:results => [['id', 'name'], [1, 'Paul']])
+    connection = stub(:execute => [['id', 'name'], [1, 'Paul']])
+    query = Oculus::Query.new
+    query.execute(connection)
     query.succeeded?.should be true
   end
 
   it "is not successful when there is an error" do
-    query = Oculus::Query.new(:error => "That's not how to write SQL")
+    connection = stub
+    connection.stub(:execute).and_raise(Oculus::Connection::Error.new('You have an error in your SQL syntax'))
+    query = Oculus::Query.new
+    query.execute(connection)
     query.succeeded?.should be false
   end
 end

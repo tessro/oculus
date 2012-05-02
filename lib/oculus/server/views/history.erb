@@ -13,7 +13,7 @@
     <% @queries.each do |query| %>
       <tr>
         <td class="status"><span class="indicator indicator-<%= query.status %>">*</span></td>
-        <td class="date"><%= query.formatted_date %></td>
+        <td class="date"><%= query.formatted_start_time %></td>
         <td>
           <a href="/queries/<%= query.id %>"><%= query.description %></a>
         </td>
