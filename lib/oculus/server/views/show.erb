@@ -12,8 +12,10 @@
   <dd class="author"><%= @query.author %>&nbsp;</dd>
   <dt>Started at</dt>
   <dd><%= @query.formatted_start_time %></dd>
+  <% if @query.finished_at %>
   <dt>Finished at</dt>
-  <dd><%= @query.formatted_finish_time %></dd>
+  <dd><%= @query.formatted_finish_time %> (<%= @query.elapsed_time %>)</dd>
+  <% end %>
 </dl>
 
 <form class="well form-inline" id="query-properties-form">

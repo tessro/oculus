@@ -20,6 +20,12 @@ describe Oculus::Presenters::QueryPresenter do
     presenter.formatted_finish_time.should == '2010-01-01 12:34 PM'
   end
 
+  it "has an elapsed time" do
+    query.started_at = Time.mktime(2010, 1, 1, 10, 30)
+    query.finished_at = Time.mktime(2010, 1, 1, 12, 34)
+    presenter.elapsed_time.should == '2 hours 4 minutes'
+  end
+
   it "reports successful queries" do
     query.stub(:complete?).and_return(true)
     presenter.status.should == 'done'

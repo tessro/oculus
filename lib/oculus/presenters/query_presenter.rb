@@ -11,6 +11,28 @@ module Oculus
         finished_at.strftime("%Y-%m-%d %I:%M %p") if finished_at
       end
 
+      def elapsed_time
+        return "" unless started_at && finished_at
+
+        seconds = (finished_at - started_at).round
+
+        if seconds < 60
+          "#{seconds} seconds"
+        else
+          minutes = (seconds / 60).floor
+          seconds %= 60
+
+          if minutes < 60
+            "#{minutes} minutes #{seconds} seconds"
+          else
+            hours = (minutes / 60).floor
+            minutes %= 60
+
+            "#{hours} hours #{minutes} minutes"
+          end
+        end
+      end
+
       def status
         if complete?
           if error
