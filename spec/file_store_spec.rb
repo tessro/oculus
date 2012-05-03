@@ -111,4 +111,21 @@ describe Oculus::Storage::FileStore do
       subject.delete_query('..')
     }.should raise_error(ArgumentError)
   end
+
+  context "when cache dir does not exist (like for a new install)" do
+    before do
+      FileUtils.rm_r('tmp/test_cache')
+    end
+
+    it "round-trips a query to disk when the cache dir does not exist (like when it's a new project!)" do
+      subject.save_query(query)
+      subject.load_query(query.id).results.should == query.results
+      subject.load_query(query.id).query.should == query.query
+      subject.load_query(query.id).started_at.should == query.started_at
+      subject.load_query(query.id).finished_at.should == query.finished_at
+      subject.load_query(query.id).author.should == query.author
+      subject.load_query(query.id).id.should == query.id
+      subject.load_query(query.id).thread_id.should == query.thread_id
+    end
+  end
 end
