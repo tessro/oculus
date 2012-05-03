@@ -1,5 +1,6 @@
 require 'yaml'
 require 'csv'
+require 'fileutils'
 
 module Oculus
   module Storage
@@ -15,6 +16,8 @@ module Oculus
       end
 
       def save_query(query)
+        ensure_root_path
+
         query.id = next_id if query.id.nil?
 
         File.open(filename_for_id(query.id), 'w') do |file|
@@ -121,6 +124,10 @@ module Oculus
 
       def primary_key_path
         File.join(root, 'NEXT_ID')
+      end
+
+      def ensure_root_path
+        FileUtils.mkdir_p root unless File.exists? root
       end
 
       attr_reader :root
