@@ -31,11 +31,17 @@ module Oculus
 
     def execute(connection)
       self.started_at = Time.now
-      self.results = connection.execute(query)
+      self.thread_id  = connection.thread_id
+      self.save
+      results = connection.execute(query)
     rescue Connection::Error => e
-      self.error = e.message
+      error = e.message
     ensure
+      reload
+      self.results = results if results
+      self.error   = error   if error
       self.finished_at = Time.now
+      self.save
     end
 
     def save
@@ -58,8 +64,17 @@ module Oculus
       end
 
       def find(id)
-        Oculus.data_store.load_query(id)
+        new(Oculus.data_store.load_query(id))
       end
     end
+
+    private
+
+    def reload
+      Oculus.data_store.load_query(id).each do |attr, value|
+        send("#{attr}=", value)
+      end
+    end
+
   end
 end

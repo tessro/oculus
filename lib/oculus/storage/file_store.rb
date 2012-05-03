@@ -10,7 +10,13 @@ module Oculus
 
       def all_queries
         Dir["#{root}/*.query"].map do |path|
-          File.parse(path)
+          Query.new(File.parse(path))
+        end.sort { |a,b| b.id <=> a.id }
+      end
+
+      def starred_queries
+        Dir["#{root}/starred/*.query"].map do |path|
+          Query.new(File.parse(path))
         end.sort { |a,b| b.id <=> a.id }
       end
 
@@ -19,7 +25,7 @@ module Oculus
 
         File.open(filename_for_id(query.id), 'w') do |file|
           file.write_prelude(query.attributes)
-          file.write_results(query.results) if query.results
+          file.write_results(query.results) if query.results && query.results.length > 0
         end
       end
 
@@ -50,9 +56,8 @@ module Oculus
           file = File.open(path)
           attributes = file.attributes
           attributes[:results] = file.results
-          Oculus::Query.new(attributes).tap do |query|
-            query.id = File.basename(path).split('.').first.to_i
-          end
+          attributes[:id] = File.basename(path).split('.').first.to_i
+          attributes
         end
 
         def write_prelude(attributes)
