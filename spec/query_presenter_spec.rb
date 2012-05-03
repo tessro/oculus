@@ -12,12 +12,12 @@ describe Oculus::Presenters::QueryPresenter do
 
   it "has a formatted start time" do
     query.started_at = Time.mktime(2010, 1, 1, 12, 34)
-    presenter.formatted_start_time.should == '2010-01-01 12:34'
+    presenter.formatted_start_time.should == '2010-01-01 12:34 PM'
   end
 
   it "has a formatted finish time" do
     query.finished_at = Time.mktime(2010, 1, 1, 12, 34)
-    presenter.formatted_finish_time.should == '2010-01-01 12:34'
+    presenter.formatted_finish_time.should == '2010-01-01 12:34 PM'
   end
 
   it "reports successful queries" do

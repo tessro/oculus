@@ -4,11 +4,11 @@ module Oculus
   module Presenters
     class QueryPresenter < SimpleDelegator
       def formatted_start_time
-        started_at.strftime("%Y-%m-%d %H:%M") if started_at
+        started_at.strftime("%Y-%m-%d %I:%M %p") if started_at
       end
 
       def formatted_finish_time
-        finished_at.strftime("%Y-%m-%d %H:%M") if finished_at
+        finished_at.strftime("%Y-%m-%d %I:%M %p") if finished_at
       end
 
       def status
