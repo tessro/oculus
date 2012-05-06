@@ -1,6 +1,16 @@
 <h1 class="description"><%= @query.description %></h1>
 
 <div id="query-actions">
+  <button class="btn btn-success star<% if @query.starred %> starred<% end %>">
+    <span class="unstarred-contents">
+      <i class="icon-star-empty icon-white"></i>
+      Star
+    </span>
+    <span class="starred-contents">
+      <i class="icon-star icon-white"></i>
+      Starred
+    </span>
+  </button>
   <button class="btn edit<% unless @query.named? %> active<% end %>" data-toggle="button">
     <i class="icon-pencil"></i>
     Edit

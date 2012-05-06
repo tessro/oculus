@@ -8,6 +8,7 @@ module Oculus
     attr_accessor :error
     attr_accessor :started_at
     attr_accessor :finished_at
+    attr_accessor :starred
     attr_accessor :thread_id
 
     def initialize(attributes = {})
@@ -23,6 +24,7 @@ module Oculus
         :query       => query,
         :started_at  => started_at,
         :finished_at => finished_at,
+        :starred     => starred,
         :thread_id   => thread_id
       }
       attrs[:error] = error if error

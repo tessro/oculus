@@ -27,6 +27,15 @@ module Oculus
           file.write_prelude(query.attributes)
           file.write_results(query.results) if query.results && query.results.length > 0
         end
+
+        FileUtils.mkdir_p(File.join(root, "starred")) unless Dir.exist?(File.join(root, "starred"))
+        star_path = starred_filename_for_id(query.id)
+
+        if query.starred
+          File.symlink(File.expand_path(filename_for_id(query.id)), star_path) unless File.exist?(star_path)
+        elsif File.exist?(star_path)
+          File.unlink(star_path)
+        end
       end
 
       def load_query(id)
@@ -40,6 +49,9 @@ module Oculus
       end
 
       def delete_query(id)
+        star_path = starred_filename_for_id(id)
+        File.unlink(star_path) if File.exist?(star_path)
+
         path = filename_for_id(id)
 
         if File.exist?(path)
@@ -57,6 +69,7 @@ module Oculus
           attributes = file.attributes
           attributes[:results] = file.results
           attributes[:id] = File.basename(path).split('.').first.to_i
+          attributes[:starred] ||= false
           attributes
         end
 
@@ -96,6 +109,11 @@ module Oculus
 
           CSV.new(read).to_a
         end
+      end
+
+      def starred_filename_for_id(id)
+        raise ArgumentError unless id.is_a?(Integer) || id =~ /^[0-9]+/
+        File.join(root, "starred", "#{id}.query")
       end
 
       def filename_for_id(id)

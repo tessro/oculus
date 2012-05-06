@@ -1,0 +1,29 @@
+<% @current_tab = 'starred' %>
+
+<h2>Starred Queries</h2>
+<table class="table">
+  <thead>
+    <th></th>
+    <th>Timestamp</th>
+    <th>Query</th>
+    <th>Author</th>
+    <th></th>
+  </thead>
+  <tbody id="history">
+    <% @queries.each do |query| %>
+      <tr>
+        <td class="status"><span class="indicator indicator-<%= query.status %>">*</span></td>
+        <td class="date"><%= query.formatted_start_time %></td>
+        <td>
+          <a href="/queries/<%= query.id %>"><%= query.description %></a>
+        </td>
+        <td class="author">
+          <%= query.author %>
+        </td>
+        <td>
+          <a class="delete" href="/queries/<%= query.id %>"><i class="icon-remove"></i></a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

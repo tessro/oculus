@@ -45,6 +45,7 @@ describe Oculus::Storage::FileStore do
       :query => query.query,
       :results => [],
       :thread_id => query.thread_id,
+      :starred => false,
       :started_at => query.started_at,
       :finished_at => query.finished_at
     }
@@ -60,6 +61,7 @@ describe Oculus::Storage::FileStore do
       :query => broken_query.query,
       :results => [],
       :thread_id => broken_query.thread_id,
+      :starred => false,
       :started_at => broken_query.started_at,
       :finished_at => broken_query.finished_at
     }
@@ -74,6 +76,7 @@ describe Oculus::Storage::FileStore do
       :query => query.query,
       :results => query.results,
       :thread_id => query.thread_id,
+      :starred => false,
       :started_at => query.started_at,
       :finished_at => query.finished_at
     }
@@ -97,6 +100,16 @@ describe Oculus::Storage::FileStore do
     subject.save_query(other_query)
 
     subject.all_queries.map(&:results).should == [other_query.results, query.results]
+  end
+
+  it "fetches starred queries" do
+    query.starred = true
+    subject.save_query(query)
+    subject.save_query(other_query)
+
+    results = subject.starred_queries
+    results.map(&:results).should == [query.results]
+    results.first.starred.should be true
   end
 
   it "deletes queries" do

@@ -21,6 +21,12 @@ module Oculus
       erb :index
     end
 
+    get '/starred' do
+      @queries = Oculus.data_store.starred_queries.map { |q| Oculus::Presenters::QueryPresenter.new(q) }
+
+      erb :starred
+    end
+
     get '/history' do
       @queries = Oculus.data_store.all_queries.map { |q| Oculus::Presenters::QueryPresenter.new(q) }
 
@@ -83,8 +89,9 @@ module Oculus
 
     put '/queries/:id' do
       @query = Oculus::Query.find(params[:id])
-      @query.name   = params[:name]
-      @query.author = params[:author]
+      @query.name    = params[:name]              if params[:name]
+      @query.author  = params[:author]            if params[:author]
+      @query.starred = params[:starred] == "true" if params[:starred]
       @query.save
 
       puts "true"

@@ -102,6 +102,18 @@ body {
   margin-top: 1em;
 }
 
+button.star .starred-contents {
+  display: none;
+}
+
+button.starred .starred-contents {
+  display: inline;
+}
+
+button.starred .unstarred-contents {
+  display: none;
+}
+
 #query-properties-form {
   display: none;
 }

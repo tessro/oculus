@@ -82,6 +82,11 @@ describe Oculus::Query do
     query.author.should == 'Paul'
   end
 
+  it "can be starred" do
+    query = Oculus::Query.new(:starred => true)
+    query.starred.should == true
+  end
+
   it "stores new queries in the data store on creation" do
     Oculus.data_store.should_receive(:save_query)
     query = Oculus::Query.create(:results => [['id', 'name'], [1, 'Paul']])
