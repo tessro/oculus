@@ -137,4 +137,10 @@ describe Oculus::Query do
     query.execute(connection)
     query.succeeded?.should be false
   end
+
+  it "exports to CSV" do
+    query = Oculus::Query.new
+    query.results = [['id', 'name'], [1, 'Paul']]
+    query.to_csv.should == "id,name\n1,Paul\n"
+  end
 end

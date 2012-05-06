@@ -56,6 +56,14 @@ module Oculus
       complete? && !error
     end
 
+    def to_csv
+      CSV.generate do |csv|
+        results.each do |row|
+          csv << row
+        end
+      end
+    end
+
     class << self
       def create(attributes)
         query = new(attributes)
