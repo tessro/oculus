@@ -66,6 +66,17 @@ module Oculus
       erb :show
     end
 
+    get '/queries/:id/download' do
+      query = Oculus::Query.find(params[:id])
+      timestamp = query.started_at.strftime('%Y%m%d%H%M')
+
+      attachment    "#{timestamp}-query-#{query.id}-results.csv"
+      content_type  "text/csv"
+      last_modified query.finished_at
+
+      query.to_csv
+    end
+
     get '/queries/:id/status' do
       Oculus::Presenters::QueryPresenter.new(Oculus::Query.find(params[:id])).status
     end

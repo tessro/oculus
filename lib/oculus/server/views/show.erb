@@ -5,6 +5,10 @@
     <i class="icon-pencil"></i>
     Edit
   </button>
+  <a class="btn file<% unless @query.succeeded? && @headers %> disabled<% end %>" href="/queries/<%= @query.id %>/download">
+    <i class="icon-file"></i>
+    Download
+  </a>
 </div>
 
 <dl class="dl-horizontal query-properties">
@@ -67,4 +71,7 @@
 <script type="text/javascript">
   var queryNode = $('pre.cm-s-default');
   CodeMirror.runMode(queryNode.text(), 'mysql', queryNode[0]);
+  $('a.disabled').click(function(e) {
+    e.preventDefault();
+  });
 </script>
