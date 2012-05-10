@@ -2,7 +2,8 @@
 
 ## Upcoming (pre-1.0)
 
-* Input validation
+* Setup instructions
+* New user experience
 
 ## Eventually (1.1 or later)
 
