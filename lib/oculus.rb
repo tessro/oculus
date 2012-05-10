@@ -25,5 +25,11 @@ module Oculus
   def connection_options
     @connection_options ||= DEFAULT_CONNECTION_OPTIONS
   end
+
+  def connection_string
+    user = "#{connection_options[:user]}@" if connection_options[:user]
+    port = ":#{connection_options[:port]}" if connection_options[:port]
+    "#{connection_options[:adapter]}://#{user}#{connection_options[:host]}#{port}/#{connection_options[:database]}"
+  end
 end
 
