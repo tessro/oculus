@@ -26,6 +26,10 @@ Vegas::Runner.new(Oculus::Server, 'oculus') do |runner, opts, app|
   opts.on("-D", "--database DATABASE", "Database to use") do |db|
     Oculus.connection_options[:database] = db
   end
+  opts.on("-t", "--adapter ADAPTER", "Database adapter") do |adapter|
+    abort "oculus: unknown adapter '#{adapter}'" unless ['mysql', 'postgres', 'pg'].include?(adapter)
+    Oculus.connection_options[:adapter] = adapter
+  end
   opts.on("-d", "--data DIRECTORY", "Data cache path (default: tmp/data)") do |path|
     Oculus.cache_path = path
   end

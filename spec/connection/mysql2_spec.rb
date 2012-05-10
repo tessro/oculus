@@ -1,6 +1,6 @@
 require 'oculus'
 
-describe Oculus::Connection do
+describe Oculus::Connection::Mysql2 do
   subject { Oculus::Connection::Mysql2.new(:host => 'localhost', :database => 'oculus_test', :username => 'root') }
 
   it "fetches a result set" do

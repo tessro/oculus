@@ -35,7 +35,7 @@ module Oculus
 
     post '/queries/:id/cancel' do
       query = Oculus::Query.find(params[:id])
-      connection = Oculus::Connection::Mysql2.new(Oculus.connection_options)
+      connection = Oculus::Connection.connect(Oculus.connection_options)
       connection.kill(query.thread_id)
       [200, "OK"]
     end
@@ -45,7 +45,7 @@ module Oculus
 
       pid = fork do
         query = Oculus::Query.find(query.id)
-        connection = Oculus::Connection::Mysql2.new(Oculus.connection_options)
+        connection = Oculus::Connection.connect(Oculus.connection_options)
         query.execute(connection)
       end
 

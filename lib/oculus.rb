@@ -6,7 +6,7 @@ require "oculus/query"
 module Oculus
   extend self
 
-  DEFAULT_CONNECTION_OPTIONS = { :host => 'localhost', :username => 'root' }
+  DEFAULT_CONNECTION_OPTIONS = { :adapter => 'mysql', :host => 'localhost' }
 
   attr_writer :cache_path
 

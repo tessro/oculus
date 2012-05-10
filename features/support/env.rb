@@ -9,6 +9,7 @@ Capybara.default_wait_time = 10
 
 Oculus.cache_path = 'tmp/test_cache'
 Oculus.connection_options = {
+  :adapter => 'mysql',
   :host => 'localhost',
   :username => 'root',
   :database => 'oculus_test'
