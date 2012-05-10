@@ -15,7 +15,7 @@ describe Oculus::Connection do
     }
 
     sleep 0.1
-    subject.execute("KILL QUERY #{thread_id}").should be_nil
+    subject.kill(thread_id).should be_nil
   end
 
   it "raises a Connection::Error on syntax errors" do

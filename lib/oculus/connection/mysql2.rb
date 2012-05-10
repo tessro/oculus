@@ -14,6 +14,10 @@ module Oculus
         raise Connection::Error.new(e.message)
       end
 
+      def kill(id)
+        execute("KILL QUERY #{id}")
+      end
+
       def thread_id
         @connection.thread_id
       end
