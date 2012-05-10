@@ -24,8 +24,10 @@ module Oculus
         query.id = next_id if query.id.nil?
 
         File.open(filename_for_id(query.id), 'w') do |file|
+          file.flock(File::LOCK_EX)
           file.write_prelude(query.attributes)
           file.write_results(query.results) if query.results && query.results.length > 0
+          file.flock(File::LOCK_UN)
         end
 
         FileUtils.mkdir_p(File.join(root, "starred")) unless Dir.exist?(File.join(root, "starred"))
@@ -66,8 +68,12 @@ module Oculus
       class File < ::File
         def self.parse(path)
           file = File.open(path)
+
+          file.flock(File::LOCK_EX)
           attributes = file.attributes
           attributes[:results] = file.results
+          file.flock(File::LOCK_UN)
+
           attributes[:id] = File.basename(path).split('.').first.to_i
           attributes[:starred] ||= false
           attributes
