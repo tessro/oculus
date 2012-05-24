@@ -12,6 +12,9 @@
 
 <div id="loading">
   <div class="alert">
+    <div class="cancel-container">
+      <a class="btn btn-mini btn-warning cancel">Cancel</a>
+    </div>
     <span id="spinner"></span>
     Executing query...
   </div>
@@ -37,6 +40,11 @@
 </div>
 
 <script type="text/javascript">
+  $('#loading .cancel').click(function(e) {
+    e.preventDefault();
+    editor.cancelQuery();
+  });
+
   var opts = {
     lines: 11,
     length: 4,

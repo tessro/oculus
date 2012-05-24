@@ -117,3 +117,8 @@ button.starred .unstarred-contents {
 #query-properties-form {
   display: none;
 }
+
+#loading .cancel-container {
+  float: right;
+  margin: -1px -26px 0 0;
+}
