@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["paul.rosania@gmail.com"]
   gem.description   = %q{Oculus is a web-based logging SQL client.  It keeps a history of your queries and the results they returned, so your research is always at hand, easy to share and easy to repeat or reproduce in the future.}
   gem.summary       = %q{Oculus is a web-based logging SQL client.}
-  gem.homepage      = "https://github.com/paulrosania/oculus"
+  gem.homepage      = "http://oculusapp.com"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
