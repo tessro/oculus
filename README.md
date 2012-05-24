@@ -28,7 +28,9 @@ For details on command line options, run:
 ## Contributing
 
 1. Fork it
-2. Make your changes
-3. Send me a pull request
+2. Run `rake db:test:populate`
+3. Make your changes
+4. Run tests (`rake`)
+5. Send me a pull request
 
 If you're making a big change, please open an Issue first, so we can discuss.
