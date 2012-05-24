@@ -40,45 +40,103 @@
 
 <pre class="cm-s-default"><%= @query.query %></pre>
 
-<% if @query.succeeded? %>
-  <% if @headers %>
-    <table class="table table-condensed" id="results-table">
-      <thead>
-        <tr>
-          <% @headers.each do |label| %>
-            <th><%= label %></th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody class="results">
-        <% @results.each do |result| %>
-          <tr>
-            <% result.each do |value| %>
-              <td><%= value %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <div class="alert alert-success">
-      <strong>Heads Up!</strong>
-      This query ran successfully, but returned no results.
+<div id="loading">
+  <div class="alert">
+    <div class="cancel-container">
+      <a class="btn btn-mini btn-warning cancel">Cancel</a>
     </div>
-  <% end %>
-<% elsif @query.error %>
-  <div class="alert alert-error">
-    <strong>Sorry!</strong>
-    <%= @query.error %>
+    <span id="spinner"></span>
+    Executing query...
   </div>
-<% else %>
-  <div class="alert alert-info">
-    <strong>Heads Up!</strong>
-    This query is in progress, and has not returned any results yet.
+</div>
+
+<div id="error" class="alert alert-error">
+  <strong>Problem!</strong>
+  <span class="message"></span>
+</div>
+
+<div id="results">
+  <div class="alert alert-success">
+    <strong>Success!</strong>
+    Query returned <span class="row-count"></span> row<span class="row-count-plural">s</span>.
   </div>
-<% end %>
+
+  <table class="table table-condensed" id="results-table">
+    <thead>
+      <tr class="headers"></tr>
+    </thead>
+    <tbody class="results"></tbody>
+  </table>
+</div>
 
 <script type="text/javascript">
+  var id = window.location.href.match(/queries\/([0-9]+)/)[1];
+
+  var query = new Query(id);
+  var callbacks = {
+    success: function(query) {
+      $('#loading, #error').hide();
+      $('#results')
+        .show()
+        .find('.row-count')
+          .text(query.results.length - 1)
+        .end()
+        .find('.row-count-plural')
+          .toggle(query.results.length !== 2);
+
+      var headerRow = $('#results .headers').empty();
+      var container = $('#results .results').empty();
+
+      for (var i = 0; i < query.results[0].length; i++) {
+        headerRow.append('<th>' + query.results[0][i] + '</th>');
+      }
+
+      for (var i = 1; i < query.results.length; i++) {
+        var result = query.results[i];
+        var row = $('<tr></tr>');
+
+        for (var j = 0; j < result.length; j++) {
+          row.append('<td>' + result[j] + '</td>');
+        }
+
+        container.append(row);
+      }
+    },
+    error: function(error) {
+      $('#loading, #results').hide();
+      $('#error')
+        .show()
+        .find('.message')
+          .text(error);
+    }
+  };
+
+  $('#results, #error').hide();
+
+  <% if @query.succeeded? || @query.error %>
+    $('#loading').hide();
+    query.load(callbacks);
+  <% else %>
+    query.monitor(callbacks);
+  <% end %>
+
+  $('#loading .cancel').click(function(e) {
+    e.preventDefault();
+    query.cancel();
+  });
+
+  var opts = {
+    lines: 11,
+    length: 4,
+    width: 2,
+    radius: 4,
+    color: '#C09853',
+    speed: 1.2,
+    trail: 60
+  };
+  var target = document.getElementById('spinner');
+  var spinner = new Spinner(opts).spin(target);
+
   var queryNode = $('pre.cm-s-default');
   CodeMirror.runMode(queryNode.text(), 'mysql', queryNode[0]);
   $('a.disabled').click(function(e) {
