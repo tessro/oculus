@@ -10,3 +10,5 @@
 * Restartable queries
 * Reports/query groups
 * Processlist monitor
+* Email notifications
+* Comments
