@@ -5,6 +5,7 @@ Feature: Users can query the database
     When I execute "SELECT * FROM oculus_users"
     Then I should see 3 rows of results
 
+  @javascript
   Scenario: Loading a cached query
     Given a query is cached with results:
       | id | users |
