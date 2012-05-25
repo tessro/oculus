@@ -1,4 +1,5 @@
 require 'oculus'
+require 'oculus/connection/mysql2'
 
 describe Oculus::Connection::Mysql2 do
   subject { Oculus::Connection::Mysql2.new(:host => 'localhost', :database => 'oculus_test', :username => 'root') }

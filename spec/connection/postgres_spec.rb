@@ -1,4 +1,5 @@
 require 'oculus'
+require 'oculus/connection/postgres'
 
 describe Oculus::Connection::Postgres do
   subject { Oculus::Connection::Postgres.new(:host => 'localhost', :database => 'oculus_test') }
