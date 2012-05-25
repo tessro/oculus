@@ -70,7 +70,7 @@ module Oculus
 
       class File < ::File
         def self.parse(path)
-          file = File.open(path)
+          file = File.open(path, 'r:UTF-8')
 
           file.flock(File::LOCK_EX)
           attributes = file.attributes
@@ -88,7 +88,7 @@ module Oculus
         end
 
         def write_results(results)
-          csv_data = CSV.generate do |csv|
+          csv_data = CSV.generate(:encoding => 'UTF-8') do |csv|
             csv << results.first
             results[1..-1].each do |result|
               csv << result
