@@ -10,6 +10,8 @@ module Oculus
     attr_accessor :finished_at
     attr_accessor :starred
     attr_accessor :thread_id
+    attr_accessor :readonly
+    attr_accessor :session_id
 
     def initialize(attributes = {})
       attributes.each do |attr, value|
@@ -25,7 +27,9 @@ module Oculus
         :started_at  => started_at,
         :finished_at => finished_at,
         :starred     => starred,
-        :thread_id   => thread_id
+        :thread_id   => thread_id,
+        :session_id  => session_id,
+        :readonly    => readonly
       }
       attrs[:error] = error if error
       attrs

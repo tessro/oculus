@@ -21,7 +21,9 @@
           <%= query.author %>
         </td>
         <td>
-          <a class="delete" href="/queries/<%= query.id %>"><i class="icon-remove"></i></a>
+          <% unless query.readonly %>
+            <a class="delete" href="/queries/<%= query.id %>"><i class="icon-remove"></i></a>
+          <% end %>
         </td>
       </tr>
     <% end %>

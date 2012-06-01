@@ -12,6 +12,8 @@ module Oculus
     set :public_folder, Proc.new { File.join(root, "server", "public") }
     set :views,         Proc.new { File.join(root, "server", "views")  }
 
+    enable :sessions
+
     helpers do
       include Rack::Utils
       alias_method :h, :escape_html
@@ -23,25 +25,29 @@ module Oculus
 
     get '/starred' do
       @queries = Oculus.data_store.starred_queries.map { |q| Oculus::Presenters::QueryPresenter.new(q) }
+      @queries = @queries.select { |q| q.session_id == session['session_id'] || q.readonly }
 
       erb :starred
     end
 
     get '/history' do
       @queries = Oculus.data_store.all_queries.map { |q| Oculus::Presenters::QueryPresenter.new(q) }
+      @queries = @queries.select { |q| q.session_id == session['session_id'] || q.readonly }
 
       erb :history
     end
 
     post '/queries/:id/cancel' do
       query = Oculus::Query.find(params[:id])
-      connection = Oculus::Connection.connect(Oculus.connection_options)
-      connection.kill(query.thread_id)
+      if query.session_id == session['session_id'] && !query.readonly
+        connection = Oculus::Connection.connect(Oculus.connection_options)
+        connection.kill(query.thread_id)
+      end
       [200, "OK"]
     end
 
     post '/queries' do
-      query = Oculus::Query.create(:query => params[:query])
+      query = Oculus::Query.create(:query => params[:query], :session_id => session['session_id'])
 
       pid = fork do
         query = Oculus::Query.find(query.id)
@@ -92,13 +98,14 @@ module Oculus
       @query.name    = params[:name]              if params[:name]
       @query.author  = params[:author]            if params[:author]
       @query.starred = params[:starred] == "true" if params[:starred]
-      @query.save
+      @query.save if @query.session_id == session["session_id"] && !@query.readonly
 
       puts "true"
     end
 
     delete '/queries/:id' do
-      Oculus.data_store.delete_query(params[:id])
+      query = Oculus::Query.find(params[:id])
+      Oculus.data_store.delete_query(params[:id]) if query.session_id == session['session_id'] && !query.readonly
       puts "true"
     end
   end
