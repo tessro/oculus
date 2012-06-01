@@ -2,7 +2,15 @@
 
 <form id="query-form" method="POST" action="/queries">
   <div id="editor-container">
-    <textarea name="query" id="query-field">SELECT * FROM countries</textarea>
+    <textarea name="query" id="query-field">SELECT
+  continent,
+  COUNT(*) countries,
+  FORMAT(SUM(gnp) / COUNT(*), 0) avg_gnp
+FROM countries
+GROUP BY continent
+ORDER BY COUNT(*) DESC
+
+-- click 'Run' to try!</textarea>
   </div>
   <div class="form-actions">
     <input type="submit" class="btn" name="submit" value="Run" />
