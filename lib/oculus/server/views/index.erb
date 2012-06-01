@@ -47,7 +47,7 @@ ORDER BY COUNT(*) DESC
   </table>
 </div>
 
-<div class="alert alert-info">
+<div id="demo" class="alert alert-info">
   <p>
     <strong>Welcome to the demo!</strong>
     To get started, try clicking 'Run'. You can type your own query if you want
@@ -92,6 +92,7 @@ ORDER BY COUNT(*) DESC
   $('#results, #error, #loading').hide();
   var editor = new QueryEditor(form, {
     onQueryStart: function() {
+      $('#demo').hide();
       $('#results, #error').hide();
       $('#loading').show();
     },
