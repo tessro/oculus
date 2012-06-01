@@ -2,7 +2,7 @@
 
 <form id="query-form" method="POST" action="/queries">
   <div id="editor-container">
-    <textarea name="query" id="query-field"></textarea>
+    <textarea name="query" id="query-field">SELECT * FROM countries</textarea>
   </div>
   <div class="form-actions">
     <input type="submit" class="btn" name="submit" value="Run" />
@@ -37,6 +37,29 @@
     </thead>
     <tbody class="results"></tbody>
   </table>
+</div>
+
+<div class="alert alert-info">
+  <p>
+    <strong>Welcome to the demo!</strong>
+    To get started, try clicking 'Run'. You can type your own query if you want
+    &mdash; try <code>SHOW TABLES</code>.
+  </p>
+  <p>
+    Sadly, this demo has a few restrictions, so I can provide it to you without
+    compromising my server entirely:
+  </p>
+  <ul>
+    <li>The MySQL user is readonly (I recommend you always use Oculus this way!)</li>
+    <li>Your queries won't be saved</li>
+    <li>You can't delete the sample queries</li>
+    <li>You can edit the sample queries, but your changes won't be saved</li>
+  </ul>
+  <p>
+    Hopefully, the demo gives you a feel for how Oculus is meant to be used,
+    and whether it could be a useful tool for you or your organization. If you
+    like what you see, please install it and try it out! Feedback is welcome.
+  </p>
 </div>
 
 <script type="text/javascript">
