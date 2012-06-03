@@ -23,7 +23,7 @@ readonly MySQL account.**
 Oculus is a Sinatra app. Run it from the command line, or mount `Oculus::Server`
 as middleware in your Rack application (recommended). For more information on
 mounting Oculus as middleware, see the wiki:
-[Running with Rack](https://github.com/paulrosania/oculus/wiki/Running-with-Rack)
+[Running with Rack](https://github.com/paulrosania/oculus/wiki/Running-with-Rack).
 
 For details on command line options, run:
 
