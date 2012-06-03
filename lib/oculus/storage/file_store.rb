@@ -37,7 +37,7 @@ module Oculus
         star_path = starred_filename_for_id(query.id)
 
         if query.starred
-          File.symlink(File.expand_path(filename_for_id(query.id)), star_path) unless File.exist?(star_path)
+          File.symlink(File.join('..', "#{query.id}.query"), star_path) unless File.exist?(star_path)
         elsif File.exist?(star_path)
           File.unlink(star_path)
         end
