@@ -27,6 +27,7 @@ module Oculus
   end
 
   def connection_string
+    return "mysql://oculus@localhost/oculus"
     user = "#{connection_options[:username]}@" if connection_options[:username]
     port = ":#{connection_options[:port]}" if connection_options[:port]
     "#{connection_options[:adapter]}://#{user}#{connection_options[:host]}#{port}/#{connection_options[:database]}"
