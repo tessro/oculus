@@ -10,7 +10,7 @@ and the results they returned, so your research is always at hand, easy to share
 and easy to repeat or reproduce in the future.
 
 **Oculus will not prevent you from doing stupid things! I recommend using a
-readonly MySQL account.**
+readonly SQL account.**
 
 ## Installation
 
