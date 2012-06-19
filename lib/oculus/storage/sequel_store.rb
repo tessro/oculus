@@ -9,10 +9,15 @@ module Oculus
       def initialize(uri, options = {})
         @uri = uri
         @table_name = options[:table] || :oculus
+        create_table
+      end
+
+      def db
+        Sequel.connect(@uri, :encoding => 'utf8')
       end
 
       def table
-        Sequel.connect(@uri).from(@table_name)
+        db.from(@table_name)
       end
 
       def all_queries
