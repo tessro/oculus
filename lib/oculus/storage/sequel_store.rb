@@ -4,12 +4,15 @@ require 'csv'
 module Oculus
   module Storage
     class SequelStore
-      attr_reader :table, :table_name, :db
+      attr_reader :table_name
 
       def initialize(uri, options = {})
-        @db = Sequel.connect(uri)
+        @uri = uri
         @table_name = options[:table] || :oculus
-        @table = @db.from(@table_name)
+      end
+
+      def table
+        Sequel.connect(@uri).from(@table_name)
       end
 
       def all_queries
