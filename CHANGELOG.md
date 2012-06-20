@@ -5,8 +5,6 @@ Breaking Changes:
 * `Oculus.cache_path` removed, please use `Oculus.storage_options[:cache_path]`
   instead.
 
-  *Paul Rosania*
-
 Features:
 
 * Support for database-backed result storage (SequelStore). Usage:
@@ -18,6 +16,12 @@ Features:
       }
 
   *Jonathan Rudenberg*
+
+* Hover actions for the SQL statement on the query detail page, to send it to
+  the editor or rerun it.
+
+* Command-R/Ctrl-R executes the query instead of reloading the page in most
+  browsers.
 
 Bugfixes:
 
