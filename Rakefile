@@ -9,7 +9,7 @@ require 'pg'
 desc 'Run RSpec tests'
 RSpec::Core::RakeTask.new(:spec) do |task|
   task.rspec_opts = %w[--color --format documentation]
-  task.pattern    = 'spec/*_spec.rb'
+  task.pattern    = 'spec/**/*_spec.rb'
 end
 
 desc 'Run Cucumber features'
