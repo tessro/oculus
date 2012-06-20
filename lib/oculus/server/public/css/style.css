@@ -118,6 +118,21 @@ button.starred .unstarred-contents {
   display: none;
 }
 
+#query-sql-container {
+  position: relative;
+}
+
+#query-sql-actions {
+  display:none;
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
+
+#query-sql-container:hover #query-sql-actions {
+  display: block;
+}
+
 #loading .cancel-container {
   float: right;
   margin: -1px -26px 0 0;

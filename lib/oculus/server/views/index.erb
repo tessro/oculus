@@ -2,7 +2,7 @@
 
 <form id="query-form" method="POST" action="/queries">
   <div id="editor-container">
-    <textarea name="query" id="query-field"></textarea>
+    <textarea name="query" id="query-field"><%= h(params[:q]) %></textarea>
   </div>
   <div class="form-actions">
     <input type="submit" class="btn" name="submit" value="Run" />
@@ -102,4 +102,8 @@
   });
 
   editor.focus();
+
+  <% if params[:run] %>
+  editor.submit();
+  <% end %>
 </script>
