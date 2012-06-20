@@ -44,12 +44,12 @@ namespace :db do
 
       # Postgres
       #
-      client = PG::Connection.new(:host => "localhost", :dbname => "postgres")
+      client = PG::Connection.new(:host => "localhost", :user => "postgres", :dbname => "postgres")
       client.query "DROP DATABASE IF EXISTS oculus_test"
       client.query "CREATE DATABASE oculus_test"
       client.close
 
-      client = PG::Connection.new(:host => "localhost", :dbname => "oculus_test")
+      client = PG::Connection.new(:host => "localhost", :user => "postgres", :dbname => "oculus_test")
       client.query %[
         CREATE TABLE oculus_users (
           id INT NOT NULL UNIQUE,
