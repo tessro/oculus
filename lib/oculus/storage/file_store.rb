@@ -5,8 +5,8 @@ require 'fileutils'
 module Oculus
   module Storage
     class FileStore
-      def initialize(root)
-        @root = root
+      def initialize(options)
+        @root = options[:cache_path] || 'tmp/data'
       end
 
       def all_queries

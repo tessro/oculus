@@ -1,5 +1,26 @@
 require 'oculus'
+require 'oculus/storage/file_store'
 require 'oculus/storage/sequel_store'
+
+describe Oculus::Storage do
+  describe "#create" do
+    it "should initialize FileStore" do
+      Oculus::Storage::FileStore.should_receive(:new)
+      Oculus::Storage.create(:adapter => 'file')
+    end
+
+    it "should initialize SequelStore" do
+      Oculus::Storage::SequelStore.should_receive(:new)
+      Oculus::Storage.create(:adapter => 'sequel')
+    end
+
+    it "should forward its options to the storage" do
+      opts = { :adapter => 'file' }
+      Oculus::Storage::FileStore.should_receive(:new).with(opts)
+      Oculus::Storage.create(opts)
+    end
+  end
+end
 
 shared_examples "storage" do |subject|
   let(:query) do
@@ -128,7 +149,7 @@ end
 
 describe Oculus::Storage::FileStore do
   it_behaves_like "storage" do
-    let(:storage) { Oculus::Storage::FileStore.new('tmp/test_cache') }
+    let(:storage) { Oculus::Storage::FileStore.new(:cache_path => 'tmp/test_cache') }
 
     before do
       FileUtils.mkdir_p('tmp/test_cache')
@@ -163,7 +184,7 @@ end
 
 describe Oculus::Storage::SequelStore do
   it_behaves_like "storage" do
-    let(:storage) { Oculus::Storage::SequelStore.new('postgres://localhost/oculus_test') }
+    let(:storage) { Oculus::Storage::SequelStore.new(:uri => 'postgres://postgres@localhost/oculus_test') }
 
     before do
       storage.drop_table

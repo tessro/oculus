@@ -6,8 +6,9 @@ module Oculus
     class SequelStore
       attr_reader :table_name
 
-      def initialize(uri, options = {})
-        @uri = uri
+      def initialize(options = {})
+        raise ArgumentError, "URI is required" unless options[:uri]
+        @uri = options[:uri]
         @table_name = options[:table] || :oculus
         create_table
       end
