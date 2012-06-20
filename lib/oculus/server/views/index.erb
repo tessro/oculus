@@ -86,7 +86,7 @@
         var row = $('<tr></tr>');
 
         for (var j = 0; j < result.length; j++) {
-          row.append('<td>' + result[j] + '</td>');
+          row.append($('<td></td>').text(result[j]));
         }
 
         container.append(row);
