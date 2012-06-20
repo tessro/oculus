@@ -102,7 +102,11 @@
         var row = $('<tr></tr>');
 
         for (var j = 0; j < result.length; j++) {
-          row.append($('<td></td>').text(result[j]));
+          if (result[j]) {
+            row.append($('<td></td>').text(result[j]));
+          } else {
+            row.append('<td class="null">null</td>');
+          }
         }
 
         container.append(row);
