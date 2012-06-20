@@ -16,6 +16,14 @@ Feature: Users can query the database
     Then I should see 3 rows of results
 
   @javascript
+  Scenario: Null result field
+    Given a query is cached with results:
+      | id | users |
+      | 1  |       |
+    When I load the cached query
+    Then I should see a null result field
+
+  @javascript
   Scenario: Deleting a query
     Given a query is cached with results:
       | id | users |

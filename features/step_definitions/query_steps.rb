@@ -37,3 +37,9 @@ Then /^I should not see any queries$/ do
     all('li').length.should == 0
   end
 end
+
+Then /^I should see a null result field$/ do
+  within('.results') do
+    all('td.null').length.should == 1
+  end
+end
