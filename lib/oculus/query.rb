@@ -1,3 +1,5 @@
+require 'csv'
+
 module Oculus
   class Query
     attr_accessor :id
