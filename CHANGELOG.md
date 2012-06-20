@@ -9,11 +9,11 @@ Features:
 
 * Support for database-backed result storage (SequelStore). Usage:
 
-      Oculus.storage_options = {
-        adapter: 'sequel',
-        uri:     'mysql://localhost/your_db',
-        table:   'your_table'                 # default: oculus
-      }
+        Oculus.storage_options = {
+          adapter: 'sequel',
+          uri:     'mysql://localhost/your_db',
+          table:   'your_table'                 # default: oculus
+        }
 
   *Jonathan Rudenberg*
 
