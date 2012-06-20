@@ -2,7 +2,7 @@ require 'oculus'
 require 'oculus/connection/postgres'
 
 describe Oculus::Connection::Postgres do
-  subject { Oculus::Connection::Postgres.new(:host => 'localhost', :database => 'oculus_test') }
+  subject { Oculus::Connection::Postgres.new(:host => 'localhost', :username => 'postgres', :database => 'oculus_test') }
 
   it "fetches a result set" do
     subject.execute("SELECT * FROM oculus_users").should == [['id', 'name'],
