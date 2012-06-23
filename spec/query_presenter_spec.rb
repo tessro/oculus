@@ -55,11 +55,11 @@ describe Oculus::Presenters::QueryPresenter do
 
   it "reports that the query has been named" do
     query.name = "Select all the things"
-    presenter.should be_named
+    presenter.named?.should be true
   end
 
   it "reports that the query has not been named" do
     query.name = nil
-    presenter.should_not be_named
+    presenter.named?.should be false
   end
 end
