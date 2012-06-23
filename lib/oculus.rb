@@ -2,12 +2,15 @@ require "oculus/version"
 require "oculus/storage"
 require "oculus/connection"
 require "oculus/query"
+require "oculus/user"
 
 module Oculus
   extend self
 
   DEFAULT_CONNECTION_OPTIONS = { :adapter => 'mysql', :host => 'localhost' }
   DEFAULT_STORAGE_OPTIONS = { :adapter => 'file', :host => 'localhost' }
+
+  attr_accessor :use_authentication
 
   attr_writer :data_store
 

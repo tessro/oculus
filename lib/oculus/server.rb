@@ -17,6 +17,16 @@ module Oculus
       alias_method :h, :escape_html
     end
 
+    before do
+      if Oculus.use_authentication
+        if env['oculus.user.id']
+          @current_user = Oculus::User.new(env['oculus.user.id'], env['oculus.user.name'])
+        else
+          redirect '/login'
+        end
+      end
+    end
+
     get '/' do
       erb :index
     end

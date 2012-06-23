@@ -27,9 +27,22 @@
               <a href="/history">History</a>
             </li>
           </ul>
-          <div class="pull-right navbar-text">
-            <%= Oculus.connection_string %>
-          </div>
+          <ul class="pull-right nav">
+            <li class="navbar-text">
+              <%= Oculus.connection_string %>
+            </li>
+            <% if Oculus.use_authentication %>
+              <li class="navbar-text auth-spacer">
+                &mdash;
+              </li>
+              <li class="navbar-text user-info">
+                <%= @current_user.name %>
+              </li>
+              <li>
+                <a href="/logout">Log Out</a>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
