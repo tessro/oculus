@@ -51,7 +51,10 @@ module Oculus
     end
 
     post '/queries' do
-      query = Oculus::Query.create(:query => params[:query])
+      attributes = { :query => params[:query] }
+      attributes[:author] = env['oculus.user.name'] if Oculus.use_authentication
+
+      query = Oculus::Query.create(attributes)
 
       pid = fork do
         query = Oculus::Query.find(query.id)
@@ -100,7 +103,7 @@ module Oculus
     put '/queries/:id' do
       @query = Oculus::Query.find(params[:id])
       @query.name    = params[:name]              if params[:name]
-      @query.author  = params[:author]            if params[:author]
+      @query.author  = params[:author]            if params[:author] && !Oculus.use_authentication
       @query.starred = params[:starred] == "true" if params[:starred]
       @query.save
 

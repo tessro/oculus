@@ -33,7 +33,9 @@
 </dl>
 
 <form class="well form-inline" id="query-properties-form">
-  <input type="text" class="input-small author" name="author" placeholder="Author" value="<%= @query.author %>" />
+  <% if !Oculus.use_authentication %>
+    <input type="text" class="input-small author" name="author" placeholder="Author" value="<%= @query.author %>" />
+  <% end %>
   <input type="text" class="span8 name" name="name" placeholder="Description" value="<%= @query.name %>" />
   <input type="submit" class="btn" name="submit" value="Save" />
 </form>
