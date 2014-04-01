@@ -7,7 +7,11 @@ require 'capybara/cucumber'
 Capybara.app = Oculus::Server
 Capybara.default_wait_time = 10
 
-Oculus.cache_path = 'tmp/test_cache'
+Oculus.storage_options = {
+  :adapter => 'file',
+  :cache_path => 'tmp/test_cache'
+}
+
 Oculus.connection_options = {
   :adapter => 'mysql',
   :host => 'localhost',

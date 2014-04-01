@@ -31,6 +31,7 @@ Vegas::Runner.new(Oculus::Server, 'oculus') do |runner, opts, app|
     Oculus.connection_options[:adapter] = adapter
   end
   opts.on("-d", "--data DIRECTORY", "Data cache path (default: tmp/data)") do |path|
-    Oculus.cache_path = path
+    Oculus.storage_options[:adapter] = "file"
+    Oculus.storage_options[:cache_path] = path
   end
 end

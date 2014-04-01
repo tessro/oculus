@@ -38,7 +38,13 @@
   <input type="submit" class="btn" name="submit" value="Save" />
 </form>
 
-<pre class="cm-s-default"><%= @query.query %></pre>
+<div id="query-sql-container">
+  <div id="query-sql-actions">
+    <a class="btn btn-mini" href="/?q=<%= URI.escape(@query.query) %>"><i class="icon-edit"></i> Send to editor</a>
+    <a class="btn btn-mini" href="/?q=<%= URI.escape(@query.query) %>&run=1"><i class="icon-repeat"></i> Rerun</a>
+  </div>
+  <pre class="cm-s-default"><%= @query.query %></pre>
+</div>
 
 <div id="loading">
   <div class="alert">
@@ -96,7 +102,11 @@
         var row = $('<tr></tr>');
 
         for (var j = 0; j < result.length; j++) {
-          row.append('<td>' + result[j] + '</td>');
+          if (result[j]) {
+            row.append($('<td></td>').text(result[j]));
+          } else {
+            row.append('<td class="null">null</td>');
+          }
         }
 
         container.append(row);

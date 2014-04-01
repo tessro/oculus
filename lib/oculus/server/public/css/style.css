@@ -57,6 +57,10 @@ body {
   font-size: 14px;
 }
 
+#results-table td.null {
+  color: grey;
+}
+
 .status .indicator {
   text-indent: -9999px;
   display: inline-block;
@@ -116,6 +120,21 @@ button.starred .unstarred-contents {
 
 #query-properties-form {
   display: none;
+}
+
+#query-sql-container {
+  position: relative;
+}
+
+#query-sql-actions {
+  display:none;
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
+
+#query-sql-container:hover #query-sql-actions {
+  display: block;
 }
 
 #loading .cancel-container {

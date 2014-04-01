@@ -18,14 +18,14 @@ describe Oculus::Connection do
 
   describe "postgres adapter option" do
     it "returns a new instance of Postgres adapter" do
-      adapter = Oculus::Connection.connect adapter: 'postgres', database: 'oculus_test'
+      adapter = Oculus::Connection.connect adapter: 'postgres', database: 'oculus_test', :host => 'localhost', :username => 'postgres'
       adapter.should be_an_instance_of Oculus::Connection::Postgres
     end
   end
 
   describe "pg adapter alias" do
     it "returns a new instance of Postgres adapter" do
-      adapter = Oculus::Connection.connect adapter: 'pg', database: 'oculus_test'
+      adapter = Oculus::Connection.connect adapter: 'pg', database: 'oculus_test', :host => 'localhost', :username => 'postgres'
       adapter.should be_an_instance_of Oculus::Connection::Postgres
     end
   end

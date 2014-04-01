@@ -15,3 +15,4 @@
 * Email notifications
 * True multiuser
 * Comments
+* Idea: decelerate polling as query runtime increases

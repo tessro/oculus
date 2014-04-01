@@ -116,7 +116,11 @@ ORDER BY COUNT(*) DESC
         var row = $('<tr></tr>');
 
         for (var j = 0; j < result.length; j++) {
-          row.append('<td>' + result[j] + '</td>');
+          if (result[j]) {
+            row.append($('<td></td>').text(result[j]));
+          } else {
+            row.append('<td class="null">null</td>');
+          }
         }
 
         container.append(row);
@@ -132,4 +136,8 @@ ORDER BY COUNT(*) DESC
   });
 
   editor.focus();
+
+  <% if params[:run] %>
+  editor.submit();
+  <% end %>
 </script>

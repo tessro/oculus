@@ -7,17 +7,18 @@ module Oculus
   extend self
 
   DEFAULT_CONNECTION_OPTIONS = { :adapter => 'mysql', :host => 'localhost' }
-
-  attr_writer :cache_path
-
-  def cache_path
-    @cache_path ||= 'tmp/data'
-  end
+  DEFAULT_STORAGE_OPTIONS = { :adapter => 'file', :host => 'localhost' }
 
   attr_writer :data_store
 
   def data_store
-    @data_store ||= Oculus::Storage::FileStore.new(Oculus.cache_path)
+    @data_store ||= Oculus::Storage.create(Oculus.storage_options)
+  end
+
+  attr_writer :storage_options
+
+  def storage_options
+    @storage_options ||= DEFAULT_STORAGE_OPTIONS
   end
 
   attr_writer :connection_options
